@@ -1,0 +1,25 @@
+name: Frontend Plantastic
+on:
+    push:
+        branches:
+            - develop
+            - main
+    pull_request:
+        branches:
+            - develop
+            - main
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: Use Node.js 22.x
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 22.x
+                  cache: npm
+            - name: Install dependencies
+              run: npm ci
+            - name: Build
+              run: npm run build
