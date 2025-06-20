@@ -1,5 +1,7 @@
-package com.plantastic.backend.models;
+package com.plantastic.backend.models.entity;
 
+import com.plantastic.backend.models.types.GrowthRate;
+import com.plantastic.backend.models.types.LightExposure;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,39 +16,39 @@ public class Plant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column
+    @Column (name = "api_id")
     private long apiId;
-    @Column (nullable = false)
+    @Column (name = "common_name",nullable = false)
     private String commonName;
-    @Column
+    @Column(name = "other_name")
     private String otherName;
-    @Column (nullable = false)
+    @Column (name = "scientific_name",nullable = false)
     private String scientificName;
     @Column (nullable = false)
     private String family;
     @Column (nullable = false)
     private String description;
-    @Column
+    @Column (name = "care_level")
     private String careLevel;
     @Column (nullable = false)
     private String imageUrl;
     @Column (nullable = false)
     private String watering;
-    @Column (nullable = false)
+    @Column (name = "repotting_method", nullable = false)
     private String repottingMethod;
     @Column (nullable = false)
     private String soil;
-    @Column (nullable = false)
+    @Column (name = "light_exposure", nullable = false)
     private LightExposure lightExposure;
-    @Column
+    @Column (name = "growth_rate")
     private GrowthRate growthRate;
-    @Column
+    @Column (name = "poisonous_to_pet")
     private boolean poisonousToPet;
-    @Column
+    @Column(name = "watering_details")
     private String wateringDetails;
-    @Column
+    @Column(name = "sunlight_details")
     private String sunlightDetails;
-    @Column
+    @Column(name = "pruning_details")
     private String pruningDetails;
 
 }
