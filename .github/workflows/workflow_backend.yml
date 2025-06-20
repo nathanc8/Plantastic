@@ -30,4 +30,6 @@ jobs:
                   cd backend
                   mvn clean install
             - name: Launch Server
-              run: mvn spring-boot:run
+              run: |
+                  cd frontend
+                  mvn spring-boot:run
