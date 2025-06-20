@@ -24,4 +24,5 @@ jobs:
             - name: Build with Maven
               run: |
                   cd backend
+                  chmod +x mvnw
                   ./mvnw clean install
