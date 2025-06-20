@@ -16,7 +16,7 @@ public class Plant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column (name = "api_id")
+    @Column (name = "api_id", nullable = false)
     private long apiId;
     @Column (name = "common_name",nullable = false)
     private String commonName;
@@ -32,13 +32,11 @@ public class Plant {
     private String careLevel;
     @Column (nullable = false)
     private String imageUrl;
-    @Column (nullable = false)
+    @Column
     private String watering;
-    @Column (name = "repotting_method", nullable = false)
-    private String repottingMethod;
-    @Column (nullable = false)
+    @Column
     private String soil;
-    @Column (name = "light_exposure", nullable = false)
+    @Column (name = "light_exposure")
     private LightExposure lightExposure;
     @Column (name = "growth_rate")
     private GrowthRate growthRate;

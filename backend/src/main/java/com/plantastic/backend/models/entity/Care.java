@@ -17,13 +17,10 @@ public class Care {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     @Column (name = "care_type",nullable = false)
     private CareType careType;
-
     @Column (name = "care_date",nullable = false)
     private LocalDate careDate;
-
     @Column
     private String notes;
 }
