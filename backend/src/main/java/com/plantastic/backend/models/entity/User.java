@@ -1,12 +1,14 @@
-package com.plantastic.backend.models;
+package com.plantastic.backend.models.entity;
 
+import com.plantastic.backend.models.types.NotificationsPreferences;
+import com.plantastic.backend.models.types.UserRole;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
 @Entity
 @Getter
@@ -28,24 +30,24 @@ public class User {
     private String password;
 
     @Column
-    private Role role;
+    private UserRole role;
 
-    @Column (nullable = false)
-    private Date createdAt;
+    @Column (name = "created_at",nullable = false)
+    private LocalDate createdAt;
 
-    @Column (nullable = false)
-    private Date updatedAt;
+    @Column (name = "updated_at",nullable = false)
+    private LocalDate updatedAt;
 
-    @Column (nullable = false)
+    @Column (name = "notifications_preferences",nullable = false)
     private NotificationsPreferences notificationsPreferences;
 
-    @Column
+    @Column(name = "notifications_time")
     private LocalTime notificationsTime;
 
-    @Column (nullable = false)
+    @Column (name = "notifications_consent", nullable = false)
     private boolean notificationsConsent;
 
-    @Column
+    @Column(name = "camera_consent")
     private boolean cameraConsent;
 
 }
