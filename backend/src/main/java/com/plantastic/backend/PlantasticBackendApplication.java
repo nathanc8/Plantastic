@@ -11,5 +11,4 @@ public class PlantasticBackendApplication {
 
 		System.out.println("hello world");
 	}
-
 }

@@ -18,6 +18,7 @@ public class Care {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Enumerated(EnumType.STRING)
     @Column (name = "care_type",nullable = false)
     private CareType careType;
 

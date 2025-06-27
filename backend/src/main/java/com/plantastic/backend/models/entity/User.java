@@ -29,6 +29,7 @@ public class User {
     @Column (nullable= false)
     private String password;
 
+    @Enumerated(EnumType.STRING)
     @Column
     private UserRole role;
 
@@ -38,6 +39,7 @@ public class User {
     @Column (name = "updated_at",nullable = false)
     private LocalDate updatedAt;
 
+    @Enumerated(EnumType.STRING)
     @Column (name = "notifications_preferences",nullable = false)
     private NotificationsPreferences notificationsPreferences;
 
