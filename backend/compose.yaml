@@ -3,7 +3,7 @@ services:
     image: 'mysql:latest'
     container_name: 'local_plantastic_db'
     volumes:
-      - ~/AppDataw
+      - ~db:/var/lib/mysql
     environment:
       - 'MYSQL_DATABASE=plantastic'
       - 'MYSQL_PASSWORD=plantastic'
