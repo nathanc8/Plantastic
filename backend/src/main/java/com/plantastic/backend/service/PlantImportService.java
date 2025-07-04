@@ -80,16 +80,18 @@ public class PlantImportService {
 
             // Care guide
             for (CareGuideItem item : careGuide.getData()) {
-                switch (item.getType()) {
-                    case "water":
-                        plant.setWateringDetails(item.getDescription());
-                        break;
-                    case "sunlight":
-                        plant.setSunlightDetails(item.getDescription());
-                        break;
-                    case "pruning":
-                        plant.setPruningDetails(item.getDescription());
-                        break;
+                for (CareGuideDescription careDescription : item.getData()) {
+                    switch (careDescription.getType()) {
+                        case "watering":
+                            plant.setWateringDetails(careDescription.getDescription());
+                            break;
+                        case "sunlight":
+                            plant.setSunlightDetails(careDescription.getDescription());
+                            break;
+                        case "pruning":
+                            plant.setPruningDetails(careDescription.getDescription());
+                            break;
+                    }
                 }
             }
 
