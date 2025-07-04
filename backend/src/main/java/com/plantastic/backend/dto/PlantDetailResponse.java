@@ -1,5 +1,7 @@
 package com.plantastic.backend.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,19 +11,26 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PlantDetailResponse {
-    private String common_name;
-    private List<String> scientific_name;
-    private List<String> other_name;
+    @JsonProperty("common_name")
+    private String commonName;
+    @JsonProperty("scientific_name")
+    private List<String> scientificName;
+    @JsonProperty("other_name")
+    private List<String> otherName;
     private String family;
     private String watering;
     private List<String> sunlight;
-    private String soil;
-    private String growth_rate;
-    private String care_level;
-    private boolean poisonous_to_pets;
+    private List<String> soil;
+    @JsonProperty("growth_rate")
+    private String growthRate;
+    @JsonProperty("care_level")
+    private String careLevel;
+    @JsonProperty("poisonous_to_pets")
+    private boolean poisonousToPets;
     private String description;
-    private Image default_image;
-    // getters & setters
+    @JsonProperty("default_image")
+    private Image defaultImage;
 }
 
