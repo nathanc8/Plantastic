@@ -1,10 +1,17 @@
 services:
   mysql:
     image: 'mysql:latest'
+    container_name: 'local_plantastic_db'
+    volumes:
+      - ~db:/var/lib/mysql
     environment:
-      - 'MYSQL_DATABASE=mydatabase'
-      - 'MYSQL_PASSWORD=secret'
-      - 'MYSQL_ROOT_PASSWORD=verysecret'
-      - 'MYSQL_USER=myuser'
+      - 'MYSQL_DATABASE=plantastic'
+      - 'MYSQL_PASSWORD=plantastic'
+      - 'MYSQL_ROOT_PASSWORD=plantastic'
+      - 'MYSQL_USER=plantastic'
     ports:
-      - '3306'
+      - '3306:3306'
+
+#db:/var/lib/mysql
+
+#"~/AppData"

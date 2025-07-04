@@ -38,8 +38,10 @@ public class Plant {
     private String repottingMethod;
     @Column (nullable = false)
     private String soil;
+    @Enumerated(EnumType.STRING)
     @Column (name = "light_exposure", nullable = false)
     private LightExposure lightExposure;
+    @Enumerated(EnumType.STRING)
     @Column (name = "growth_rate")
     private GrowthRate growthRate;
     @Column (name = "poisonous_to_pet")
