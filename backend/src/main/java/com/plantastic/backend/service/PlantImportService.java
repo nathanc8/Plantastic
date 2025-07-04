@@ -36,11 +36,10 @@ public class PlantImportService {
             return;
         }
 
-        for (int i =0; i < 1; i++) {
             List<PlantSummary> listPlantSummary = new ArrayList<>(response.getData());
             PlantSummary summary = listPlantSummary.getFirst();
 
-            //Boucle for à conserver pour faire les appels en boucle
+            //Boucle for à conserver pour faire les appels sur l'intégralité des données (les 30 plantes qu'on récupère avec un appel api)
             //for (PlantSummary summary : response.getData()) {
             try {
                 PlantDetailResponse detail = restTemplate.getForObject(
@@ -89,8 +88,6 @@ public class PlantImportService {
             } catch (Exception e) {
                 System.out.println("⚠️ Erreur sur la plante ID " + summary.getApiId() + " : " + e.getMessage());
             }
-        }
-
         System.out.println("🌿 Import terminé.");
     }
 }
