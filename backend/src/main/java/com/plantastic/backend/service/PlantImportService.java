@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import com.plantastic.backend.dto.PlantSummary;
+
+
 
 import java.io.IOException;
 import java.util.ArrayList;
