@@ -36,9 +36,9 @@ public class Plant {
     @Column (nullable = false)
     private String watering;
     @Column
-    private List<String> soil;
-    @Column (name = "light_exposure", nullable = false)
-    private List<String> lightExposure;
+    private String soil;
+    @Column (name = "light_exposure")
+    private String lightExposure;
     @Column (name = "growth_rate")
     private String growthRate;
     @Column (name = "poisonous_to_pet")
