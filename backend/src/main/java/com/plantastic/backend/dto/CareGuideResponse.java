@@ -13,5 +13,4 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CareGuideResponse {
     private List<CareGuideItem> data;
-    // getter & setter
 }

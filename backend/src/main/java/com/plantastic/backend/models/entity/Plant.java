@@ -4,9 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.w3c.dom.Text;
-
-import java.util.List;
 
 @Entity
 @Getter

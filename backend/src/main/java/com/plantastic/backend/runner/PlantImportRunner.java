@@ -4,8 +4,6 @@ import com.plantastic.backend.service.PlantImportService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-
 @Component
 public class PlantImportRunner implements CommandLineRunner {
 
@@ -16,10 +14,11 @@ public class PlantImportRunner implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws IOException {
+    public void run(String... args) {
         if (args.length > 0 && args[0].equals("import-plants")) {
             System.out.println("📥 Début de l'import...");
-            importService.importPlants();
+            importService.importThirtyPlants(1);
+
         }
     }
 }

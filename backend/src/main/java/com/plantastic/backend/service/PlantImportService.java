@@ -3,100 +3,110 @@ package com.plantastic.backend.service;
 import com.plantastic.backend.dto.*;
 import com.plantastic.backend.models.entity.Plant;
 import com.plantastic.backend.repository.PlantRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import com.plantastic.backend.dto.PlantSummary;
 
-
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class PlantImportService {
 
     private final RestTemplate restTemplate;
     private final PlantRepository plantRepository;
 
+    //Injecté automatiquement par Spring à partir du fichier application.properties.
     @Value("${api.key}")
     private String apiKey;
 
-    public PlantImportService(RestTemplateBuilder builder, PlantRepository repo) {
+    public PlantImportService(RestTemplateBuilder builder, PlantRepository plantRepository) {
         this.restTemplate = builder.build();
-        this.plantRepository = repo;
+        this.plantRepository = plantRepository;
     }
 
-    public void importPlants() throws IOException {
-        String listUrl = "https://perenual.com/api/v2/species-list?key=" + apiKey + "&indoor=1";
+    public void importThirtyPlants(int page) {
+        String listUrl = "https://perenual.com/api/v2/species-list?key=" + apiKey + "&indoor=1&page=" + page;
         PlantListResponse response = restTemplate.getForObject(listUrl, PlantListResponse.class);
 
-        if (response == null || response.getData() == null) {
-            System.out.println("❌ Impossible de récupérer la liste des plantes.");
+        if (response == null || response.getData() == null || response.getData().isEmpty()) {
+            log.error("❌ Impossible de récupérer la liste des plantes depuis l'API.");
             return;
         }
 
-        List<PlantSummary> listPlantSummary = new ArrayList<>(response.getData());
-        System.out.println("-------------------------listPlantSummary-----------------------");
-        System.out.println(listPlantSummary.toString());
-
+        List<PlantSummary> plantSummaries = new ArrayList<>(response.getData());
+        log.debug("🌿 Liste des plantes récupérées : {}", plantSummaries);
 
         //Boucle for à conserver pour faire les appels sur l'intégralité des données (les 30 plantes qu'on récupère avec un appel api)
-        for (PlantSummary summary : response.getData()) {
-//        int plantIdToinject = 543;
-            try {
-                //Pour plusieurs plantes
-                PlantDetailResponse detail = restTemplate.getForObject(
-                        "https://perenual.com/api/v2/species/details/" + summary.getApiId() + "?key=" + apiKey,
-                        PlantDetailResponse.class
-                );
+        for (PlantSummary summary : plantSummaries) {
+            importOnePlant(summary.getApiId());
+        }
+        log.info("✅ Import terminé pour {} plantes.", plantSummaries.size());
+    }
 
-                //Pour une seule plante
-//                PlantDetailResponse detail = restTemplate.getForObject(
-//                        "https://perenual.com/api/v2/species/details/" + plantIdToinject + "?key=" + apiKey,
-//                        PlantDetailResponse.class
-//                );
+    public void importOnePlant(int apiId) {
+        Optional<Plant> plantOpt = createPlantById(apiId);
+        if (plantOpt.isPresent()) {
+            Plant plant = plantOpt.get();
+            plantRepository.save(plant);
+            log.info("✅ Plante importée : {}, {}", plant.getCommonName(), plant.getApiId());
+        } else {
+            log.warn("❌ Échec de l'import : aucune plante trouvée pour apiId {}", apiId);
+        }
+    }
 
-                //Pour plusieurs plantes
-                CareGuideResponse careGuide = restTemplate.getForObject(
-                        "https://perenual.com/api/species-care-guide-list?species_id=" + summary.getApiId() + "&key=" + apiKey,
-                        CareGuideResponse.class
-                );
+    private Optional<Plant> createPlantById(int apiId) {
+        try {
+            //Récupération des détails de la plante
+            PlantDetailResponse detail = restTemplate.getForObject(
+                    "https://perenual.com/api/v2/species/details/" + apiId + "?key=" + apiKey,
+                    PlantDetailResponse.class
+            );
 
-                //Pour une seule plante
-//                CareGuideResponse careGuide = restTemplate.getForObject(
-//                        "https://perenual.com/api/species-care-guide-list?species_id=" + plantIdToinject + "&key=" + apiKey,
-//                        CareGuideResponse.class);
+            if (detail == null) {
+                log.warn("❌ Aucun détail trouvé pour l'apiId {}", apiId);
+                return Optional.empty();
+            }
 
-                //Il faut set les données des DTO avant de les injecter dans l'objet en lui même
+            //Vérification de si une plante avec cette apiId existe ou non
+            //Si une plante existe, on la récupère, sinon on en créée une nouvelle
+            Optional<Plant> existingPlant = plantRepository.findByApiId(apiId);
+            Plant plant = existingPlant.orElseGet(Plant::new);
 
-//Pour une seule plante
-//               Optional<Plant> existingPlant = plantRepository.findByApiId(plantIdToinject);
+            //Set des attributs de la plante récupérés via detail
+            plant.setApiId(apiId);
+            plant.setCommonName(detail.getCommonName());
+            plant.setScientificName(detail.getScientificName().isEmpty() ? null : detail.getScientificName().getFirst());
+            plant.setOtherName(
+                    detail.getOtherName() != null ? String.join(", ", detail.getOtherName()) : null
+            );
+            plant.setFamily(detail.getFamily());
+            plant.setWatering(detail.getWatering());
+            plant.setLightExposure(
+                    detail.getSunlight() != null ? String.join(", ", detail.getSunlight()) : null
+            );
+            plant.setSoil(
+                    detail.getSoil() != null ? String.join(", ", detail.getSoil()) : null
+            );
+            plant.setGrowthRate(detail.getGrowthRate());
+            plant.setCareLevel(detail.getCareLevel());
+            plant.setPoisonousToPet(detail.isPoisonousToPets());
+            plant.setDescription(detail.getDescription());
+            plant.setImageUrl(detail.getDefaultImage() != null ? detail.getDefaultImage().getOriginalUrl() : "");
 
-                //Pour plusieurs plantes
-                Optional<Plant> existingPlant = plantRepository.findByApiId(summary.getApiId());
+            // Care guide
+            CareGuideResponse careGuide = restTemplate.getForObject(
+                    "https://perenual.com/api/species-care-guide-list?species_id=" + apiId + "&key=" + apiKey,
+                    CareGuideResponse.class
+            );
 
-
-                Plant plant = existingPlant.orElseGet(Plant::new);
-//                plant.setApiId(plantIdToinject);
-                plant.setApiId(summary.getApiId());
-                plant.setCommonName(detail.getCommonName());
-                plant.setScientificName(detail.getScientificName().isEmpty() ? null : detail.getScientificName().get(0));
-                plant.setOtherName(String.join(", ", detail.getOtherName()));
-                plant.setFamily(detail.getFamily());
-                plant.setWatering(detail.getWatering());
-                plant.setLightExposure(detail.getSunlight() != null ? String.join(", ", detail.getSunlight()) : null);
-                plant.setSoil(String.join(", ",detail.getSoil()));
-                plant.setGrowthRate(detail.getGrowthRate());
-                plant.setCareLevel(detail.getCareLevel());
-                plant.setPoisonousToPet(detail.isPoisonousToPets());
-                plant.setDescription(detail.getDescription());
-                plant.setImageUrl(detail.getDefaultImage() != null ? detail.getDefaultImage().getOriginalUrl() : null);
-
-                // Care guide
+            if (careGuide == null || careGuide.getData() == null) {
+                log.warn("❌ Aucun careGuide trouvé pour l'apiId {}", apiId);
+            } else {
                 for (CareGuideItem item : careGuide.getData()) {
                     for (CareGuideDescription careDescription : item.getData()) {
                         switch (careDescription.getType()) {
@@ -109,19 +119,16 @@ public class PlantImportService {
                             case "pruning":
                                 plant.setPruningDetails(careDescription.getDescription());
                                 break;
+                            default:
+                                log.debug("Type de care guide non géré : '{}' pour apiId {}", careDescription.getType(), apiId);
                         }
                     }
                 }
-
-                plantRepository.save(plant);
-                System.out.println("✅ Plant importée : " + plant.getCommonName());
-
-            } catch (Exception e) {
-                System.out.println("⚠️ Erreur sur la plante ID " + summary.getApiId() + " : " + e.getMessage());
-
-//                System.out.println("⚠️ Erreur sur la plante ID " + plantIdToinject + " : " + e.getMessage());
             }
-            System.out.println("🌿 Import terminé.");
+            return Optional.of(plant);
+        } catch (Exception e) {
+            log.error("⚠️ Erreur lors de l'import de la plante ID {} : {}", apiId, e.getMessage(), e);
+            return Optional.empty();
         }
     }
 }
