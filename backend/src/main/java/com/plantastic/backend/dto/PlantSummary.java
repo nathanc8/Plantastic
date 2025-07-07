@@ -9,4 +9,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PlantSummary {
     private int apiId;
+
 }
