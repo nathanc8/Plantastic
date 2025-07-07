@@ -1,11 +1,12 @@
 package com.plantastic.backend.models.entity;
 
-import com.plantastic.backend.models.types.GrowthRate;
-import com.plantastic.backend.models.types.LightExposure;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.w3c.dom.Text;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -26,7 +27,7 @@ public class Plant {
     private String scientificName;
     @Column (nullable = false)
     private String family;
-    @Column (nullable = false)
+    @Column (nullable = false, length = 2000)
     private String description;
     @Column (name = "care_level")
     private String careLevel;
@@ -34,23 +35,19 @@ public class Plant {
     private String imageUrl;
     @Column (nullable = false)
     private String watering;
-    @Column (name = "repotting_method", nullable = false)
-    private String repottingMethod;
-    @Column (nullable = false)
-    private String soil;
-    @Enumerated(EnumType.STRING)
+    @Column
+    private List<String> soil;
     @Column (name = "light_exposure", nullable = false)
-    private LightExposure lightExposure;
-    @Enumerated(EnumType.STRING)
+    private List<String> lightExposure;
     @Column (name = "growth_rate")
-    private GrowthRate growthRate;
+    private String growthRate;
     @Column (name = "poisonous_to_pet")
     private boolean poisonousToPet;
-    @Column(name = "watering_details")
+    @Column(name = "watering_details", length = 2000)
     private String wateringDetails;
-    @Column(name = "sunlight_details")
+    @Column(name = "sunlight_details", length = 2000)
     private String sunlightDetails;
-    @Column(name = "pruning_details")
+    @Column(name = "pruning_details", length = 2000)
     private String pruningDetails;
 
 }
