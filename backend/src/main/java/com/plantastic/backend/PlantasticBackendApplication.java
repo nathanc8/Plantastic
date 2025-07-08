@@ -1,5 +1,6 @@
 package com.plantastic.backend;
 
+import com.plantastic.backend.service.JsonService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

@@ -1,6 +1,6 @@
 package com.plantastic.backend.service;
 
-import com.plantastic.backend.dto.*;
+import com.plantastic.backend.dto.api.*;
 import com.plantastic.backend.models.entity.Plant;
 import com.plantastic.backend.repository.PlantRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -32,18 +32,19 @@ public class PlantImportService {
     //Une page comporte 30 plantes
     public void importThirtyPlantsFromApi(int page) {
         String listUrl = "https://perenual.com/api/v2/species-list?key=" + apiKey + "&indoor=1&page=" + page;
-        PlantListResponse response = restTemplate.getForObject(listUrl, PlantListResponse.class);
+        PlantListApiResponse response = restTemplate.getForObject(listUrl, PlantListApiResponse.class);
 
         if (response == null || response.getData() == null || response.getData().isEmpty()) {
             log.error("❌ Impossible de récupérer la liste des plantes depuis l'API.");
             return;
         }
 
-        List<PlantSummary> plantSummaries = new ArrayList<>(response.getData());
+        List<PlantApiSummary> plantSummaries = new ArrayList<>(response.getData());
         log.debug("🌿 Liste des plantes récupérées : {}", plantSummaries);
 
         //Boucle for à conserver pour faire les appels sur l'intégralité des données (les 30 plantes qu'on récupère avec un appel api)
-        for (PlantSummary summary : plantSummaries) {
+        for (PlantApiSummary summary : plantSummaries) {
+
             importOnePlant(summary.getApiId());
         }
         log.info("✅ Import terminé pour {} plantes.", plantSummaries.size());
@@ -51,7 +52,7 @@ public class PlantImportService {
 
     //Si on souhaite utiliser cette méthode en dehors de cette classe, la mettre en public
     private void importOnePlant(int apiId) {
-        Optional<Plant> plantOpt = createPlantById(apiId);
+        Optional<Plant> plantOpt = createPlantByIdFromApi(apiId);
         if (plantOpt.isPresent()) {
             Plant plant = plantOpt.get();
             plantRepository.save(plant);
@@ -61,12 +62,12 @@ public class PlantImportService {
         }
     }
 
-    private Optional<Plant> createPlantById(int apiId) {
+    private Optional<Plant> createPlantByIdFromApi(int apiId) {
         try {
             //Récupération des détails de la plante
-            PlantDetailResponse detail = restTemplate.getForObject(
+            PlantDetailApiResponse detail = restTemplate.getForObject(
                     "https://perenual.com/api/v2/species/details/" + apiId + "?key=" + apiKey,
-                    PlantDetailResponse.class
+                    PlantDetailApiResponse.class
             );
 
             if (detail == null) {
@@ -103,16 +104,16 @@ public class PlantImportService {
             plant.setImageUrl(detail.getDefaultImage() != null ? detail.getDefaultImage().getOriginalUrl() : "");
 
             // Care guide
-            CareGuideResponse careGuide = restTemplate.getForObject(
+            CareGuideApiResponse careGuide = restTemplate.getForObject(
                     "https://perenual.com/api/species-care-guide-list?species_id=" + apiId + "&key=" + apiKey,
-                    CareGuideResponse.class
+                    CareGuideApiResponse.class
             );
 
             if (careGuide == null || careGuide.getData() == null) {
                 log.warn("❌ Aucun careGuide trouvé pour l'apiId {}", apiId);
             } else {
-                for (CareGuideItem item : careGuide.getData()) {
-                    for (CareGuideDescription careDescription : item.getData()) {
+                for (CareGuideApiItem item : careGuide.getData()) {
+                    for (CareGuideApiDescription careDescription : item.getData()) {
                         switch (careDescription.getType()) {
                             case "watering":
                                 plant.setWateringDetails(careDescription.getDescription());
@@ -129,6 +130,7 @@ public class PlantImportService {
                     }
                 }
             }
+
             return Optional.of(plant);
         } catch (Exception e) {
             log.error("⚠️ Erreur lors de l'import de la plante ID {} : {}", apiId, e.getMessage(), e);

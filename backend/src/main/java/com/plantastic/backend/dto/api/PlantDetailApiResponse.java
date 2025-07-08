@@ -1,4 +1,4 @@
-package com.plantastic.backend.dto;
+package com.plantastic.backend.dto.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PlantDetailResponse {
+public class PlantDetailApiResponse {
     @JsonProperty("common_name")
     private String commonName;
     @JsonProperty("scientific_name")
@@ -31,6 +31,6 @@ public class PlantDetailResponse {
     private boolean poisonousToPets;
     private String description;
     @JsonProperty("default_image")
-    private Image defaultImage;
+    private ImageApi defaultImage;
 }
 

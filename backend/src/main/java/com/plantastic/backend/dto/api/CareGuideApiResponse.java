@@ -1,4 +1,4 @@
-package com.plantastic.backend.dto;
+package com.plantastic.backend.dto.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
@@ -11,6 +11,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PlantListResponse {
-    private List<PlantSummary> data;
+public class CareGuideApiResponse {
+    private List<CareGuideApiItem> data;
 }

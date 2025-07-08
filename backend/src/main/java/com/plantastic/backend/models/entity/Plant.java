@@ -11,9 +11,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @Table(name = "plants")
 public class Plant {
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private long id;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
     @Column (name = "api_id")
     private long apiId;
     @Column (name = "common_name",nullable = false)
