@@ -17,7 +17,7 @@ public class PlantImportRunner implements CommandLineRunner {
     public void run(String... args) {
         if (args.length > 0 && args[0].equals("import-plants")) {
             System.out.println("📥 Début de l'import...");
-            importService.importThirtyPlants(1);
+            importService.importThirtyPlantsFromApi(1);
 
         }
     }

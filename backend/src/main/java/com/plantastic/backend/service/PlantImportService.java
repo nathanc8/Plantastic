@@ -29,7 +29,8 @@ public class PlantImportService {
         this.plantRepository = plantRepository;
     }
 
-    public void importThirtyPlants(int page) {
+    //Une page comporte 30 plantes
+    public void importThirtyPlantsFromApi(int page) {
         String listUrl = "https://perenual.com/api/v2/species-list?key=" + apiKey + "&indoor=1&page=" + page;
         PlantListResponse response = restTemplate.getForObject(listUrl, PlantListResponse.class);
 
@@ -48,7 +49,8 @@ public class PlantImportService {
         log.info("✅ Import terminé pour {} plantes.", plantSummaries.size());
     }
 
-    public void importOnePlant(int apiId) {
+    //Si on souhaite utiliser cette méthode en dehors de cette classe, la mettre en public
+    private void importOnePlant(int apiId) {
         Optional<Plant> plantOpt = createPlantById(apiId);
         if (plantOpt.isPresent()) {
             Plant plant = plantOpt.get();
@@ -80,7 +82,9 @@ public class PlantImportService {
             //Set des attributs de la plante récupérés via detail
             plant.setApiId(apiId);
             plant.setCommonName(detail.getCommonName());
-            plant.setScientificName(detail.getScientificName().isEmpty() ? null : detail.getScientificName().getFirst());
+            plant.setScientificName(
+                    detail.getScientificName().isEmpty() ? null : detail.getScientificName().getFirst()
+            );
             plant.setOtherName(
                     detail.getOtherName() != null ? String.join(", ", detail.getOtherName()) : null
             );
