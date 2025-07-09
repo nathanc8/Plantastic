@@ -1,6 +1,7 @@
 package com.plantastic.backend.service;
 
 import com.plantastic.backend.dto.api.*;
+import com.plantastic.backend.dto.json.PlantDtoFromJson;
 import com.plantastic.backend.models.entity.Plant;
 import com.plantastic.backend.repository.PlantRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -45,18 +46,18 @@ public class PlantImportService {
         //Boucle for à conserver pour faire les appels sur l'intégralité des données (les 30 plantes qu'on récupère avec un appel api)
         for (PlantApiSummary summary : plantSummaries) {
 
-            importOnePlant(summary.getApiId());
+            importOnePlantFromApi(summary.getApiId());
         }
         log.info("✅ Import terminé pour {} plantes.", plantSummaries.size());
     }
 
     //Si on souhaite utiliser cette méthode en dehors de cette classe, la mettre en public
-    private void importOnePlant(int apiId) {
+    private void importOnePlantFromApi(int apiId) {
         Optional<Plant> plantOpt = createPlantByIdFromApi(apiId);
         if (plantOpt.isPresent()) {
             Plant plant = plantOpt.get();
             plantRepository.save(plant);
-            log.info("✅ Plante importée : {}, {}", plant.getCommonName(), plant.getApiId());
+            log.info("✅ Plante importée : {}, apiId : {}", plant.getCommonName(), plant.getApiId());
         } else {
             log.warn("❌ Échec de l'import : aucune plante trouvée pour apiId {}", apiId);
         }
@@ -75,34 +76,6 @@ public class PlantImportService {
                 return Optional.empty();
             }
 
-            //Vérification de si une plante avec cette apiId existe ou non
-            //Si une plante existe, on la récupère, sinon on en créée une nouvelle
-            Optional<Plant> existingPlant = plantRepository.findByApiId(apiId);
-            Plant plant = existingPlant.orElseGet(Plant::new);
-
-            //Set des attributs de la plante récupérés via detail
-            plant.setApiId(apiId);
-            plant.setCommonName(detail.getCommonName());
-            plant.setScientificName(
-                    detail.getScientificName().isEmpty() ? null : detail.getScientificName().getFirst()
-            );
-            plant.setOtherName(
-                    detail.getOtherName() != null ? String.join(", ", detail.getOtherName()) : null
-            );
-            plant.setFamily(detail.getFamily());
-            plant.setWatering(detail.getWatering());
-            plant.setLightExposure(
-                    detail.getSunlight() != null ? String.join(", ", detail.getSunlight()) : null
-            );
-            plant.setSoil(
-                    detail.getSoil() != null ? String.join(", ", detail.getSoil()) : null
-            );
-            plant.setGrowthRate(detail.getGrowthRate());
-            plant.setCareLevel(detail.getCareLevel());
-            plant.setPoisonousToPet(detail.isPoisonousToPets());
-            plant.setDescription(detail.getDescription());
-            plant.setImageUrl(detail.getDefaultImage() != null ? detail.getDefaultImage().getOriginalUrl() : "");
-
             // Care guide
             CareGuideApiResponse careGuide = restTemplate.getForObject(
                     "https://perenual.com/api/species-care-guide-list?species_id=" + apiId + "&key=" + apiKey,
@@ -111,30 +84,36 @@ public class PlantImportService {
 
             if (careGuide == null || careGuide.getData() == null) {
                 log.warn("❌ Aucun careGuide trouvé pour l'apiId {}", apiId);
-            } else {
-                for (CareGuideApiItem item : careGuide.getData()) {
-                    for (CareGuideApiDescription careDescription : item.getData()) {
-                        switch (careDescription.getType()) {
-                            case "watering":
-                                plant.setWateringDetails(careDescription.getDescription());
-                                break;
-                            case "sunlight":
-                                plant.setSunlightDetails(careDescription.getDescription());
-                                break;
-                            case "pruning":
-                                plant.setPruningDetails(careDescription.getDescription());
-                                break;
-                            default:
-                                log.debug("Type de care guide non géré : '{}' pour apiId {}", careDescription.getType(), apiId);
-                        }
-                    }
-                }
             }
+
+            //Vérification de si une plante avec cette apiId existe ou non
+            //Si une plante existe, on la récupère, sinon on en créée une nouvelle
+            Optional<Plant> existingPlant = plantRepository.findByApiId(apiId);
+            Plant plant = existingPlant.orElseGet(() -> new Plant(detail, careGuide, apiId));
 
             return Optional.of(plant);
         } catch (Exception e) {
             log.error("⚠️ Erreur lors de l'import de la plante ID {} : {}", apiId, e.getMessage(), e);
             return Optional.empty();
         }
+    }
+
+    public void importAllPlantsFromJson(List<PlantDtoFromJson> plantsList) {
+        for (PlantDtoFromJson jsonPLant : plantsList) {
+
+            int jsonPlantApiId = (int) jsonPLant.getApiId();
+
+            Optional<Plant> existingPlant = plantRepository.findByApiId(jsonPlantApiId);
+
+            Plant plant = existingPlant.orElseGet(() -> new Plant(jsonPLant));
+
+            if(existingPlant.isPresent()) {
+                plant.updatePlantFromDto(jsonPLant);
+            }
+
+            plantRepository.save(plant);
+            log.info("✅ Plante importée : {}, apiId : {}", plant.getCommonName(), plant.getApiId());
+        }
+        log.info("✅ Import terminé pour {} plantes.", plantsList.size());
     }
 }

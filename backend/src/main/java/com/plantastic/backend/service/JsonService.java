@@ -2,6 +2,7 @@ package com.plantastic.backend.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.plantastic.backend.dto.json.PlantDtoFromJson;
 import com.plantastic.backend.models.entity.Plant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -22,16 +23,13 @@ public class JsonService {
         this.restTemplate = builder.build();
     }
 
-    public List<Plant> readBackupPlantDbJson(String jsonFilePath) throws Exception {
-//        String jsonFilePath = "data.backup.backup_bdd_20250708_plants.json";
-        ClassPathResource resource = new ClassPathResource(jsonFilePath);
+    public List<PlantDtoFromJson> readBackupPlantDbJson(String jsonFilePathFromResources) throws Exception {
+        ClassPathResource resource = new ClassPathResource(jsonFilePathFromResources);
 
         try (InputStream inputStream = resource.getInputStream()) {
             ObjectMapper mapper = new ObjectMapper();
-            return mapper.readValue(inputStream, new TypeReference<List<Plant>>() {
+            return mapper.readValue(inputStream, new TypeReference<List<PlantDtoFromJson>>() {
             });
         }
     }
-
-
 }
