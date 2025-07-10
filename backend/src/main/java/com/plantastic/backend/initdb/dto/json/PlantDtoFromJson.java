@@ -1,18 +1,11 @@
-package com.plantastic.backend.dto.json;
+package com.plantastic.backend.initdb.dto.json;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.plantastic.backend.models.entity.Plant;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.core.io.ClassPathResource;
-
-import java.io.InputStream;
-import java.util.List;
 
 @Getter
 @Setter

@@ -1,4 +1,4 @@
-package com.plantastic.backend.dto.api;
+package com.plantastic.backend.initdb.dto.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

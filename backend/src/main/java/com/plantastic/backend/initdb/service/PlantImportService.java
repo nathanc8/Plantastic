@@ -1,7 +1,10 @@
-package com.plantastic.backend.service;
+package com.plantastic.backend.initdb.service;
 
-import com.plantastic.backend.dto.api.*;
-import com.plantastic.backend.dto.json.PlantDtoFromJson;
+import com.plantastic.backend.initdb.dto.json.PlantDtoFromJson;
+import com.plantastic.backend.initdb.dto.api.CareGuideApiResponse;
+import com.plantastic.backend.initdb.dto.api.PlantApiSummary;
+import com.plantastic.backend.initdb.dto.api.PlantDetailApiResponse;
+import com.plantastic.backend.initdb.dto.api.PlantListApiResponse;
 import com.plantastic.backend.models.entity.Plant;
 import com.plantastic.backend.repository.PlantRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +39,7 @@ public class PlantImportService {
         PlantListApiResponse response = restTemplate.getForObject(listUrl, PlantListApiResponse.class);
 
         if (response == null || response.getData() == null || response.getData().isEmpty()) {
-            log.error("❌ Impossible de récupérer la liste des plantes depuis l'API.");
+            log.warn("❌ Il n'y a plus de plantes à récupérer");
             return;
         }
 
@@ -52,14 +55,14 @@ public class PlantImportService {
     }
 
     //Si on souhaite utiliser cette méthode en dehors de cette classe, la mettre en public
-    private void importOnePlantFromApi(int apiId) {
+    public void importOnePlantFromApi(int apiId) {
         Optional<Plant> plantOpt = createPlantByIdFromApi(apiId);
         if (plantOpt.isPresent()) {
             Plant plant = plantOpt.get();
             plantRepository.save(plant);
             log.info("✅ Plante importée : {}, apiId : {}", plant.getCommonName(), plant.getApiId());
         } else {
-            log.warn("❌ Échec de l'import : aucune plante trouvée pour apiId {}", apiId);
+            log.error("❌ Échec de l'import : aucune plante trouvée pour apiId {}", apiId);
         }
     }
 
@@ -72,7 +75,7 @@ public class PlantImportService {
             );
 
             if (detail == null) {
-                log.warn("❌ Aucun détail trouvé pour l'apiId {}", apiId);
+                log.warn("⚠️Aucun détail trouvé pour l'apiId {}", apiId);
                 return Optional.empty();
             }
 
@@ -83,7 +86,7 @@ public class PlantImportService {
             );
 
             if (careGuide == null || careGuide.getData() == null) {
-                log.warn("❌ Aucun careGuide trouvé pour l'apiId {}", apiId);
+                log.warn("⚠️Aucun careGuide trouvé pour l'apiId {}", apiId);
             }
 
             //Vérification de si une plante avec cette apiId existe ou non
@@ -93,7 +96,7 @@ public class PlantImportService {
 
             return Optional.of(plant);
         } catch (Exception e) {
-            log.error("⚠️ Erreur lors de l'import de la plante ID {} : {}", apiId, e.getMessage(), e);
+            log.error("❌ Erreur lors de l'import de la plante ID {} : {}", apiId, e.getMessage(), e);
             return Optional.empty();
         }
     }

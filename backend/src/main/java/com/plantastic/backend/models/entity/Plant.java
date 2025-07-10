@@ -1,17 +1,12 @@
 package com.plantastic.backend.models.entity;
 
-import com.plantastic.backend.dto.api.CareGuideApiDescription;
-import com.plantastic.backend.dto.api.CareGuideApiItem;
-import com.plantastic.backend.dto.api.CareGuideApiResponse;
-import com.plantastic.backend.dto.api.PlantDetailApiResponse;
-import com.plantastic.backend.dto.json.PlantDtoFromJson;
+import com.plantastic.backend.initdb.dto.api.*;
+import com.plantastic.backend.initdb.dto.json.PlantDtoFromJson;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.Optional;
 
 @Entity
 @Getter
@@ -25,21 +20,21 @@ public class Plant {
     private long id;
     @Column(name = "api_id")
     private long apiId;
-    @Column(name = "common_name", nullable = false)
+    @Column(name = "common_name")
     private String commonName;
     @Column(name = "other_name")
     private String otherName;
-    @Column(name = "scientific_name", nullable = false)
+    @Column(name = "scientific_name")
     private String scientificName;
-    @Column(nullable = false)
+    @Column
     private String family;
-    @Column(nullable = false, length = 2000)
+    @Column(length = 2000)
     private String description;
     @Column(name = "care_level")
     private String careLevel;
     @Column
     private String imageUrl;
-    @Column(nullable = false)
+    @Column
     private String watering;
     @Column
     private String soil;
@@ -80,40 +75,33 @@ public class Plant {
     public Plant(PlantDetailApiResponse detailPlant, CareGuideApiResponse careGuide, int apiId) {
         //Set des attributs de la plante récupérés via detail
         this.setApiId(apiId);
-        this.setCommonName(detailPlant.getCommonName());
-        this.setScientificName(
-                detailPlant.getScientificName().isEmpty() ? null : detailPlant.getScientificName().getFirst()
-        );
-        this.setOtherName(
-                detailPlant.getOtherName() != null ? String.join(", ", detailPlant.getOtherName()) : null
-        );
-        this.setFamily(detailPlant.getFamily());
-        this.setWatering(detailPlant.getWatering());
-        this.setLightExposure(
-                detailPlant.getSunlight() != null ? String.join(", ", detailPlant.getSunlight()) : null
-        );
-        this.setSoil(
-                detailPlant.getSoil() != null ? String.join(", ", detailPlant.getSoil()) : null
-        );
-        this.setGrowthRate(detailPlant.getGrowthRate());
-        this.setCareLevel(detailPlant.getCareLevel());
-        this.setPoisonousToPet(
-                (detailPlant.isPoisonousToPets())
-        );
-        this.setDescription(detailPlant.getDescription());
-        this.setImageUrl(detailPlant.getDefaultImage() != null ? detailPlant.getDefaultImage().getOriginalUrl() : "");
+        this.commonName = emptyStringToNull(detailPlant.getCommonName());
+        this.scientificName = emptyStringToNull(String.join(",",detailPlant.getScientificName()));
+        this.otherName = emptyStringToNull(String.join(",",detailPlant.getOtherName()));
+        this.family = emptyStringToNull(detailPlant.getFamily());
+        this.watering = emptyStringToNull(detailPlant.getWatering());
+        this.lightExposure = emptyStringToNull(String.join(",",detailPlant.getSunlight()));
+        this.soil = emptyStringToNull(String.join(",",detailPlant.getSoil()));
+        this.growthRate = emptyStringToNull(detailPlant.getGrowthRate());
+        this.careLevel = emptyStringToNull(detailPlant.getCareLevel());
+        this.poisonousToPet = detailPlant.isPoisonousToPets();
+        this.description = emptyStringToNull(detailPlant.getDescription());
+
+        ImageApi defaultImage = detailPlant.getDefaultImage();
+        String originalUrl = (defaultImage!=null) ? defaultImage.getOriginalUrl() : null;
+        this.imageUrl = emptyStringToNull(originalUrl);
 
         for (CareGuideApiItem item : careGuide.getData()) {
             for (CareGuideApiDescription careDescription : item.getData()) {
                 switch (careDescription.getType()) {
                     case "watering":
-                        this.setWateringDetails(careDescription.getDescription());
+                        this.wateringDetails = emptyStringToNull(careDescription.getDescription());
                         break;
                     case "sunlight":
-                        this.setSunlightDetails(careDescription.getDescription());
+                        this.sunlightDetails = emptyStringToNull(careDescription.getDescription());
                         break;
                     case "pruning":
-                        this.setPruningDetails(careDescription.getDescription());
+                        this.pruningDetails = emptyStringToNull(careDescription.getDescription());
                         break;
                     default:
                         log.debug("Type de care guide non géré : '{}' pour apiId {}", careDescription.getType(), apiId);

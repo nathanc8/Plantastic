@@ -1,16 +1,17 @@
-package com.plantastic.backend.dto.api;
+package com.plantastic.backend.initdb.dto.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CareGuideApiResponse {
-    private List<CareGuideApiItem> data;
+public class ImageApi {
+    @JsonProperty("original_url")
+    private String originalUrl;
 }

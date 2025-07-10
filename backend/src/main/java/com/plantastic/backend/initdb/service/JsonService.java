@@ -1,9 +1,8 @@
-package com.plantastic.backend.service;
+package com.plantastic.backend.initdb.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.plantastic.backend.dto.json.PlantDtoFromJson;
-import com.plantastic.backend.models.entity.Plant;
+import com.plantastic.backend.initdb.dto.json.PlantDtoFromJson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.io.ClassPathResource;
