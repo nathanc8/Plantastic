@@ -39,7 +39,8 @@ jobs:
               with:
                   distribution: "temurin"
                   java-version: "21"
-
+            - name: Setup application.properties
+              run: cp backend/src/main/resources/application.properties.exemple backend/src/main/resources/application.properties
             - name: Wait for MySQL to be ready
               run: |
                   echo "Waiting for MySQL to be ready..."
