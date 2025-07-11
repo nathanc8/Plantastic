@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import type { User } from "./mocks/handlers";
+import React from "react";
 
 export function App() {
   const [users, setUsers] = useState<User[]>([]);
@@ -14,17 +15,16 @@ export function App() {
       try {
         const response = await fetch("api/auth/login");
         const data: User[] = await response.json();
-        console.log(data);
         setUsers(data);
       } catch (error) {
-        console.error("Erreur lors du fetch", error);
+        console.debug("Erreur lors du fetch", error);
       }
     };
     fetchUsers();
   }, []);
 
   // POST REQUEST
-  const onPostClick = async (e: ReactFormEvent) => {
+  const onPostClick = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const response = await fetch("/api/auth/signup", {
@@ -35,11 +35,11 @@ export function App() {
         body: JSON.stringify({ pseudo, email, password }),
       });
       if (!response.ok) {
-        console.error("Erreur API:", response.status);
+        console.debug("Erreur API:", response.status);
         return;
       }
       const newUser: User = await response.json();
-      console.log("New user created: ", newUser);
+      console.debug("New user created: ", newUser);
 
       setUsers((prev) => [...prev, newUser]);
 
@@ -47,7 +47,7 @@ export function App() {
       setEmail("");
       setPassword("");
     } catch (error) {
-      console.error("Erreur lors du POST", error);
+      console.debug("Erreur lors du POST", error);
     }
   };
 
