@@ -1,24 +1,52 @@
-// // to access the HTTP methods that we want to handle
+// to access the HTTP methods that we want to handle
 
-// import { http, HttpResponse } from 'msw';
+import { http, HttpResponse } from "msw";
+import { z } from "zod";
 
-// interface User {
-//     id: number;
-//     pseudo: string;
-//     email: string;
-//     password: string;
-// }
+export interface User {
+  id: number;
+  pseudo: string;
+  email: string;
+  password: string;
+}
 
-// export const handlers = [
-//     http.get<never,User[]>("/api/auth/login", ({request}) => {
-//         return HttpResponse.json([
-//             {
-//                 id: 1, 
-//                 pseudo: "toto",
-//                 email: "toto@yopmail.fr",
-//                 password: "User1234!"
-//             },
-//         ]);
-//     }),
-// ];
+const Userschema = z.object({
+  pseudo: z.string(),
+  email: z.string(),
+  password: z.string(),
+});
 
+export const handlers = [
+  http.get<never, User[]>("/api/auth/login", ({ request }) => {
+    return HttpResponse.json([
+      {
+        id: 1,
+        pseudo: "toto",
+        email: "toto@yopmail.fr",
+        password: "User1234!",
+      },
+    ]);
+  }),
+
+  http.post<never, User[]>("/api/auth/signup", async ({ request }) => {
+    const requestBody = await request.json();
+    const result = Userschema.safeParse(requestBody);
+
+    console.log("How's the body? ", result);
+    if (!result.success) {
+      return HttpResponse.json({ error: "Invalid input" }, { status: 400 });
+    }
+    const parsed = result.data;
+    console.log(parsed);
+
+    // ✅ Simuler un ID pour le nouvel utilisateur
+    const newUser: User = {
+      id: 2, // tu peux faire un ID dynamique si tu veux
+      ...parsed,
+    };
+
+    console.log("User créé :", newUser);
+
+    return HttpResponse.json([newUser], { status: 201 });
+  }),
+];

@@ -72,3 +72,7 @@ Formaliser le méthode GET pour récup le user.
 Rédiger méthode POST pour simuler inscription. 
 Faire un check des routes aussi
 https://www.youtube.com/watch?v=pP8FQnv6o7A&ab_channel=Anson reprendre à 19.08
+
+
+#**SETTING UP ROUTES**
+with npm install --save-dev @types/react-router-dom
