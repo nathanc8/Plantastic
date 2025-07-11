@@ -52,3 +52,27 @@ export default tseslint.config({
   },
 })
 ```
+
+#**ESLINT ON CI/CD**
+Will be applied before the build by the dependency defined in package.json. by "eslint:github-action"
+
+
+#**INSTALL REACT ROUTER**
+npm install --save-dev @types/react-router-dom
+
+#**MOCK SERVICE WORKER**
+Mock Service Worker is an API mocking library that allows you to write client-agnostic mocks
+to install: npm i -D msw
+when the package is installed, need to save the SW script in the public folder : npx msw init public/
+This SW is available at runtime. Can be checked in http://localhost:5174/mockServiceWorker.js
+It's set up for the browser, it can be set up for a server environment to mock API calls for unit tests
+
+A reprendre : 
+Formaliser le méthode GET pour récup le user. 
+Rédiger méthode POST pour simuler inscription. 
+Faire un check des routes aussi
+https://www.youtube.com/watch?v=pP8FQnv6o7A&ab_channel=Anson reprendre à 19.08
+
+
+#**SETTING UP ROUTES**
+with npm install --save-dev @types/react-router-dom
