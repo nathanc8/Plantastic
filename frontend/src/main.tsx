@@ -1,9 +1,9 @@
-import { StrictMode } from 'react'
+//import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import './index.css';
-import React from 'react';
+//import React from 'react';
 
 // Handling the asynchronous operation to avoid a race condition 
 async function enableMocking() {
