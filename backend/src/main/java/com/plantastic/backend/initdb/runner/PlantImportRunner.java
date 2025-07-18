@@ -25,9 +25,9 @@ public class PlantImportRunner implements CommandLineRunner {
             System.out.println("📥 Début de l'import...");
 
             //Penser à incrémenter la page de + 1 à chaque appel. On doit se retrouver avec 30 plantes de plus en BDD à chaque appel
-//            importService.importThirtyPlantsFromApi(2);
+            importService.importThirtyPlantsFromApi(4);
 
-            importService.importOnePlantFromApi(748);
+//            importService.importOnePlantFromApi(748);
 
             //Mettre à jour le chemin du fichier JSON à chaque appel.
 //            String jsonFilePath = "data/backup/backup_bdd_20250708_plants.json";
