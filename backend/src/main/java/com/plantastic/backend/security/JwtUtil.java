@@ -1,4 +1,4 @@
-package com.example.test_auth.security;
+package com.plantastic.backend.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

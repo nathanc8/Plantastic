@@ -1,4 +1,4 @@
-package com.example.test_auth.model;
+package com.plantastic.backend.models.auth;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,4 +1,4 @@
-package com.example.test_auth.security;
+package com.plantastic.backend.security;
 
 import com.example.test_auth.service.MyUserDetailsService;
 import jakarta.servlet.FilterChain;

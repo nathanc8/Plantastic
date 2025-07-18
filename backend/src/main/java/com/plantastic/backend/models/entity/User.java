@@ -21,7 +21,7 @@ public class User {
     private long id;
 
     @Column (unique = true, nullable= false)
-    private String pseudo;
+    private String username;
 
     @Column (unique = true, nullable= false)
     private String email;

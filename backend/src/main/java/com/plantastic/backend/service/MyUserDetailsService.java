@@ -1,8 +1,9 @@
-package com.example.test_auth.service;
+package com.plantastic.backend.service;
 
-import com.example.test_auth.model.User;
-import com.example.test_auth.repository.UserRepository;
-import com.example.test_auth.security.MyUserDetails;
+
+import com.plantastic.backend.models.entity.User;
+import com.plantastic.backend.repository.UserRepository;
+import com.plantastic.backend.security.MyUserDetails;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
