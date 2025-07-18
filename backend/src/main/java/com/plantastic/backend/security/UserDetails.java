@@ -3,15 +3,14 @@ package com.plantastic.backend.security;
 import com.plantastic.backend.models.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
 
-public class MyUserDetails implements UserDetails {
+public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
     private final User user;
 
-    public MyUserDetails(User user) {
+    public UserDetails(User user) {
         this.user = user;
     }
 

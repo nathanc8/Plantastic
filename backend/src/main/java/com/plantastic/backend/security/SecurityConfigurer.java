@@ -1,6 +1,6 @@
 package com.plantastic.backend.security;
 
-import com.example.test_auth.service.MyUserDetailsService;
+import com.plantastic.backend.service.UserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +20,7 @@ public class SecurityConfigurer {
     private JwtRequestFilter jwtRequestFilter;
 
     @Autowired
-    private MyUserDetailsService myUserDetailsService;
+    private UserDetailsService userDetailsService;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
