@@ -59,6 +59,7 @@ Will be applied before the build by the dependency defined in package.json. by "
 
 #**INSTALL REACT ROUTER**
 npm install --save-dev @types/react-router-dom
+/!\ install v6 = npm install react-router-dom@6
 
 #**MOCK SERVICE WORKER**
 Mock Service Worker is an API mocking library that allows you to write client-agnostic mocks
@@ -68,11 +69,14 @@ This SW is available at runtime. Can be checked in http://localhost:5174/mockSer
 It's set up for the browser, it can be set up for a server environment to mock API calls for unit tests
 
 A reprendre : 
-Formaliser le méthode GET pour récup le user. 
-Rédiger méthode POST pour simuler inscription. 
-Faire un check des routes aussi
+Vidéo MSW
 https://www.youtube.com/watch?v=pP8FQnv6o7A&ab_channel=Anson reprendre à 19.08
 
+A reprendre 11/07 :
+Comment set up react toastify dans le router? 
+https://www.youtube.com/watch?v=ZEB3VCbXQHA&list=PL82C6-O4XrHcJhPkcWkzFnjEBiAtpWGrw
 
-#**SETTING UP ROUTES**
-with npm install --save-dev @types/react-router-dom
+
+#**ZOD LIBRARY**
+Zod is a TypeScript-first validation library. Define a schema and parse some data with it. You'll get back a strongly typed, validated result.
+npm install zod
