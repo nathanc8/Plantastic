@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -17,13 +18,27 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
 
-    @Value("${jwt.secret}")
-    private String secretKeyString;
+    private final String secretKeyString;
 
-    @Value("${jwt.expirationMS}")
-    private long expirationMs;
+    private final long expirationMs;
 
-    private final Key secretKey = Keys.hmacShaKeyFor(Base64.getDecoder().decode(secretKeyString));
+    private Key secretKey;
+
+    public JwtUtil(@Value("${jwt.secret}") String secretKeyString,@Value("${jwt.expirationMs}") long expirationMs) {
+        if (secretKeyString == null || secretKeyString.isEmpty()) {
+            throw new IllegalArgumentException("La clé JWT ne peut pas être vide");
+        }
+        if (expirationMs <= 0) {
+            throw new IllegalArgumentException("La clé JWT ne peut pas être vide");
+        }
+        this.secretKeyString = secretKeyString;
+        this.expirationMs = expirationMs;
+    }
+
+    @PostConstruct
+    public void initJwtKey() {
+        this.secretKey = Keys.hmacShaKeyFor(Base64.getDecoder().decode(secretKeyString));
+    }
 
     public String generateToken(String username) {
         Map<String, Object> claims = new HashMap<>();

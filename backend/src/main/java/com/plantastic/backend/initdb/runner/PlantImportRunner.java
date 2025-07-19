@@ -25,7 +25,7 @@ public class PlantImportRunner implements CommandLineRunner {
             System.out.println("📥 Début de l'import...");
 
             //Penser à incrémenter la page de + 1 à chaque appel. On doit se retrouver avec 30 plantes de plus en BDD à chaque appel
-            importService.importThirtyPlantsFromApi(4);
+            importService.importThirtyPlantsFromApi(6);
 
 //            importService.importOnePlantFromApi(748);
 

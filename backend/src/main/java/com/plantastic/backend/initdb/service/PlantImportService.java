@@ -23,14 +23,12 @@ public class PlantImportService {
 
     private final RestTemplate restTemplate;
     private final PlantRepository plantRepository;
+    private final String apiKey;
 
-    //Injecté automatiquement par Spring à partir du fichier application.properties.
-    @Value("${api.key}")
-    private String apiKey;
-
-    public PlantImportService(RestTemplateBuilder builder, PlantRepository plantRepository) {
+    public PlantImportService(RestTemplateBuilder builder, PlantRepository plantRepository,@Value("${api.key}") String apiKey) {
         this.restTemplate = builder.build();
         this.plantRepository = plantRepository;
+        this.apiKey = apiKey;
     }
 
     //Une page comporte 30 plantes
