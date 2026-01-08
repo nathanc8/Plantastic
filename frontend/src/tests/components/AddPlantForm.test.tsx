@@ -55,7 +55,40 @@ it("should show plant suggestions when typing", async () => {
   renderAddPlantForm();
 
   const searchInput = screen.getByLabelText(/Search a plant/i);
+
   await user.type(searchInput, "Pot");
+
+  await waitFor(() => {
+    expect(screen.getByText(/Pothos/i)).toBeInTheDocument();
+  });
+});
+
+// FUNCTIONNAL DEBOUNCING
+it("should debounce search and only call API after 300ms with 3+ chars", async () => {
+  const user = userEvent.setup();
+
+  server.use(
+    http.get(`${TEST_API_BASE_URL}/api/plants/summaries`, () => {
+      return HttpResponse.json(mockPlants, { status: 200 });
+    })
+  );
+
+  renderAddPlantForm();
+  await waitFor(() => {
+    expect(screen.getByLabelText(/Search a plant/i)).toBeInTheDocument();
+  });
+  const searchInput = screen.getByLabelText(/Search a plant/i);
+
+  await user.type(searchInput, "Pot");
+
+  const immediate = screen.queryByText(/Pothos/i);
+  expect(immediate).not.toBeInTheDocument();
+
+  await new Promise((resolve) => setTimeout(resolve, 150));
+  const at150 = screen.queryByText(/Pothos/i);
+  expect(at150).not.toBeInTheDocument();
+
+  await new Promise((resolve) => setTimeout(resolve, 200));
 
   await waitFor(() => {
     expect(screen.getByText(/Pothos/i)).toBeInTheDocument();
