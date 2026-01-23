@@ -10,7 +10,6 @@ export const WaterMultiplePlantsModal = ({
 }) => {
   const { plants, refreshGarden } = useGarden();
   const [selectedPlantIds, setSelectedPlantIds] = useState<number[]>([]);
-  // const [_apiMessage, setApiMessage] = useState<ReactNode>(null);
   const [wateringDate, setWateringDate] = useState(new Date());
 
   const handleCheckboxChange = (plantId: number, isChecked: boolean) => {
