@@ -26,7 +26,7 @@ const WateringOneModal = ({
         {
           method: "PATCH",
           body: JSON.stringify(plantId),
-        }
+        },
       );
 
       const data = await response.json();
@@ -68,7 +68,7 @@ const WateringOneModal = ({
         </button>
         <button
           onClick={onClose}
-          className={`${baseButtonClass} bg-[#db7922] hover:bg-[#aa590d]`}
+          className={`${baseButtonClass} bg-[#8B4509] hover:bg-[#7A3D08]`}
         >
           Cancel
         </button>

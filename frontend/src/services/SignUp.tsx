@@ -141,7 +141,15 @@ const SignUp: React.FC = () => {
                 to="/login"
               />
             </form>
-            {apiMessage && <p className="text-green-500 mt-2">{apiMessage}</p>}
+            {apiMessage && (
+              <div
+                role="status"
+                aria-live="polite"
+                className="text-green-500 mt-2"
+              >
+                {apiMessage}
+              </div>
+            )}
           </AuthCard>
         </div>
       </div>

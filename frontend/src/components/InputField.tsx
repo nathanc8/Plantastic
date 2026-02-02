@@ -10,6 +10,7 @@ type InputFieldProps = {
   register: UseFormRegisterReturn;
   error?: FieldError;
   helperText?: string;
+  max?: string;
 };
 
 export default function InputField({
@@ -20,6 +21,7 @@ export default function InputField({
   register,
   error,
   helperText,
+  max,
 }: InputFieldProps) {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -45,6 +47,7 @@ export default function InputField({
               ? "border border-red-500 text-red-700"
               : "border border-gray-300 text-gray-900"
           }`}
+          max={max}
         />
         {showPasswordToggle && (
           <button

@@ -67,25 +67,6 @@ export default function BottomNavigation({ onRefresh }: BottomNavigationProps) {
           <span className={textClass}>Encyclopedia</span>
         </button>
       </div>
-      <div
-        id="left_navbar"
-        className="relative z-20 bg-[#2D3D2D] grid grid-cols-2 place-items-center rounded-r-[2rem] pr-4 "
-      >
-        <button
-          id="advices_button"
-          onClick={() => navigate("/advices")}
-          className={getButtonClass("/advices")}
-          aria-label="advices"
-        >
-          <HiOutlineLightBulb className={getIconClass("/advices")} />
-          <span className={textClass}>Advices</span>
-        </button>
-
-        <ProfileMenu
-          iconClassName={getIconClass("/profile")}
-          textClassName={textClass}
-        />
-      </div>
       {isActive("/") && (
         <FloatingAddButton
           menuOptions={[
@@ -108,6 +89,26 @@ export default function BottomNavigation({ onRefresh }: BottomNavigationProps) {
           )}
         ></FloatingAddButton>
       )}
+      <div
+        id="left_navbar"
+        className="relative z-20 bg-[#2D3D2D] grid grid-cols-2 place-items-center rounded-r-[2rem] pr-4 "
+      >
+        <button
+          id="advices_button"
+          onClick={() => navigate("/advices")}
+          className={getButtonClass("/advices")}
+          aria-label="advices"
+        >
+          <HiOutlineLightBulb className={getIconClass("/advices")} />
+          <span className={textClass}>Advices</span>
+        </button>
+
+        <ProfileMenu
+          iconClassName={getIconClass("/profile")}
+          textClassName={textClass}
+        />
+      </div>
+
       <div
         id="middle_navbar"
         className="

@@ -20,6 +20,7 @@ export default function Home() {
 
   return (
     <BackgroundWrapper>
+      <BottomNavBar />
       <Header />
       <main className="flex flex-col items-center w-full px-4 pt-4  pb-60">
         <div id="all-cards" className="flex flex-wrap gap-3 justify-center">
@@ -32,7 +33,6 @@ export default function Home() {
           )}
         </div>
       </main>
-      <BottomNavBar />
     </BackgroundWrapper>
   );
 }

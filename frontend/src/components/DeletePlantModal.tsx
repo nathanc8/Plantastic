@@ -44,7 +44,7 @@ const DeletePlantModal = ({ onClose, plantId }: DeletePlantModalProps) => {
         </button>
         <button
           onClick={handleDelete}
-          className={`${baseButtonClass} bg-[#db7922] hover:bg-[#aa590d]`}
+          className={`${baseButtonClass} bg-[#8B4509] hover:bg-[#7A3D08]`}
         >
           Confirm
         </button>

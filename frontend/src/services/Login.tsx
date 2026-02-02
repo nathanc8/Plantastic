@@ -128,7 +128,13 @@ export default function Login() {
                 to="/signup"
               />
               {error && (
-                <span className="text-red-500 block mt-2">{error}</span>
+                <div
+                  role="alert"
+                  aria-live="assertive"
+                  className="text-red-500 block mt-2"
+                >
+                  {error}
+                </div>
               )}
             </form>
           </AuthCard>

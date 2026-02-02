@@ -13,7 +13,7 @@ export default function Modal({
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
-  // Automatic fonus on input field if form, close button if not
+  // Automatic focus on input field if form, close button if not
   useEffect(() => {
     if (isOpen && modalRef.current) {
       if (focusOnFirstInput) {
