@@ -100,6 +100,7 @@ export default function Login() {
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
               <InputField
                 label="Username or email"
+                type="text"
                 placeholder="Enter username or email"
                 register={register("username")}
                 error={errors.username}
@@ -109,6 +110,7 @@ export default function Login() {
                 label="Password"
                 placeholder="Enter password"
                 type="password"
+                showPasswordToggle={true}
                 register={register("password")}
                 error={errors.password}
               />

@@ -39,7 +39,8 @@ export default function BottomNavigation({ onRefresh }: BottomNavigationProps) {
   const textClass = "hidden sm:block sm:text-xs xl:text-sm 2xl:text-lg";
 
   return (
-    <div
+    <nav
+      aria-label="Main navigation"
       id="navbar"
       className="fixed bottom-4 h-20 sm:h-24 2xl:h-28 left-4 right-4  xl:left-10 xl:right-10 2xl:right-12 2xl:left-12 grid grid-cols-2 gap-[4rem] text-white  mb-6 font-montserrat opacity-90 z-20"
     >
@@ -51,19 +52,19 @@ export default function BottomNavigation({ onRefresh }: BottomNavigationProps) {
           id="digital-garden-button"
           onClick={() => navigate("/")}
           className={getButtonClass("/")}
-          title="digital-garden"
+          aria-label="digital garden"
         >
           <PiPlantBold className={getIconClass("/")} />
-          <p className={textClass}>Digital garden</p>
+          <span className={textClass}>Digital garden</span>
         </button>
         <button
           onClick={() => navigate("/encyclopedia")}
           id="encyclopedia_button"
           className={getButtonClass("/encyclopedia")}
-          title="encyclopedia"
+          aria-lable="encyclopedia"
         >
           <BiSolidBookBookmark className={getIconClass("/encyclopedia")} />
-          <p className={textClass}>Encyclopedia</p>
+          <span className={textClass}>Encyclopedia</span>
         </button>
       </div>
       <div
@@ -74,10 +75,10 @@ export default function BottomNavigation({ onRefresh }: BottomNavigationProps) {
           id="advices_button"
           onClick={() => navigate("/advices")}
           className={getButtonClass("/advices")}
-          title="advices"
+          aria-label="advices"
         >
           <HiOutlineLightBulb className={getIconClass("/advices")} />
-          <p className={textClass}>Advices</p>
+          <span className={textClass}>Advices</span>
         </button>
 
         <ProfileMenu
@@ -111,7 +112,8 @@ export default function BottomNavigation({ onRefresh }: BottomNavigationProps) {
         id="middle_navbar"
         className="
         absolute z-10 bottom-0 h-full left-1/2 -translate-x-1/2 w-1/2 bg-[#2D3D2D] pointer-events-none "
+        aria-hidden="true"
       ></div>
-    </div>
+    </nav>
   );
 }

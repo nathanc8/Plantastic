@@ -26,7 +26,7 @@ const SignUp: React.FC = () => {
   });
 
   const onSubmit: SubmitHandler<SignUpFormData> = async (
-    formData: SignUpFormData
+    formData: SignUpFormData,
   ) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -36,7 +36,7 @@ const SignUp: React.FC = () => {
         body: JSON.stringify(registerData),
       });
 
-      const data = await response.text(); 
+      const data = await response.text();
 
       if (response.status === 401) {
         setApiMessage("Missing or invalid token");
@@ -49,9 +49,9 @@ const SignUp: React.FC = () => {
       const username = data.split(": ")[1] || registerData.username;
       setApiMessage(
         <>
-          Welcome <strong>{username}</strong>! Registration successful.{" "}
-          Please <Link to="/login">login</Link> to enjoy Plantastic 🌿
-        </>
+          Welcome <strong>{username}</strong>! Registration successful. Please{" "}
+          <Link to="/login">login</Link> to enjoy Plantastic 🌿
+        </>,
       );
       reset();
     } catch (error) {
@@ -91,6 +91,7 @@ const SignUp: React.FC = () => {
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
               <InputField
                 label="Email"
+                type="text"
                 placeholder="Enter your email"
                 register={register("email", {
                   required: "email is required",
@@ -99,6 +100,7 @@ const SignUp: React.FC = () => {
               />
               <InputField
                 label="Username"
+                type="text"
                 placeholder="Enter your username"
                 register={register("username", {
                   required: "username is required",
@@ -108,15 +110,18 @@ const SignUp: React.FC = () => {
               <InputField
                 label="Password"
                 type="password"
+                showPasswordToggle={true}
                 placeholder="Enter your password"
                 register={register("password", {
                   required: "password is required",
                 })}
                 error={errors.password}
+                helperText="Password must contain at least: one uppercase, one lowercase, one digit and one special character [#?!@$ %^&*-]"
               />
               <InputField
                 label="Confirm password"
                 type="password"
+                showPasswordToggle={true}
                 placeholder="Please confirm your password"
                 register={register("confirmPassword", {
                   required: "Please confirm your password",
