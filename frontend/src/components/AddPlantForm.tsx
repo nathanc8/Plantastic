@@ -119,12 +119,14 @@ export default function AddPlantForm({ onClose }: FormProps) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 ">
-      <h1 className="text-2-xl text-black font-bold mb-4">Add a plant</h1>
+      <h1 className="text-2-xl text-black font-bold mb-4 font font-montserrat">
+        Add a plant
+      </h1>
       <div>
         {/* PLANT SEARCH */}
         <label
           htmlFor="plant-search"
-          className="block text-sm text-black font-medium mb-1"
+          className="block text-sm font-bold text-gray-900 font-montserrat mb-1"
         >
           Search a plant:
         </label>
@@ -249,7 +251,7 @@ export default function AddPlantForm({ onClose }: FormProps) {
         {/* PICTURE  */}
         <label
           htmlFor="plant-picture"
-          className="block text-sm text-black font-medium  mt-5 mb-1"
+          className="block text-sm font-bold text-gray-900 font-montserrat mb-1"
         >
           Picture: <span className="text-gray-500 text-xs">(Max 10MB)</span>
         </label>
@@ -329,7 +331,7 @@ export default function AddPlantForm({ onClose }: FormProps) {
       <button
         type="submit"
         id="submit-button"
-        className="w-full bg-red bg-[#4f674f] text-white py-2 rounded-lg hover:bg-[#374737]"
+        className="w-full bg-red bg-[#4f674f] text-white py-2 rounded-lg hover:bg-[#374737] font font-montserrat"
       >
         Send
       </button>

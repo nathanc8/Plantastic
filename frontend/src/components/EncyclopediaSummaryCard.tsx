@@ -39,7 +39,7 @@ export default function PlantCardEncyclopedia({
           <p className="text-sm text-gray-600 italic truncate">
             {plant.scientificName}
           </p>
-          <p className="text-sm text-gray-500 mt-2">{descriptionSnippet}</p>
+          <p className="text-sm text-gray-600 mt-2">{descriptionSnippet}</p>
         </div>
         <p className="text-sm text-gray-600 mt-2">Watering: {plant.watering}</p>
       </div>
