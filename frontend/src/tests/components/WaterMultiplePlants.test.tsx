@@ -308,3 +308,70 @@ describe("Loading state during submission", () => {
     expect(submittingButton).toHaveAttribute("aria-disabled", "true");
   });
 });
+
+describe("Selection feddback display", () => {
+  it("should display 'No plants selected' initially", () => {
+    vi.mocked(useGarden).mockReturnValue(mockGardenContextWithPlants);
+
+    renderWaterMultiplePlantModal();
+
+    expect(screen.getByText(/No plants selected/i)).toBeInTheDocument();
+  });
+
+  it("should display '1 plant selected' after selecting one checkbox", async () => {
+    vi.mocked(useGarden).mockReturnValue(mockGardenContextWithPlants);
+    const user = userEvent.setup();
+
+    renderWaterMultiplePlantModal();
+
+    const checkboxes = screen.getAllByRole("checkbox");
+    await user.click(checkboxes[0]);
+
+    expect(screen.getByText(/1 plant selected/i)).toBeInTheDocument();
+  });
+
+  it("should display correct count after selecting multiple checkboxes", async () => {
+    vi.mocked(useGarden).mockReturnValue(mockGardenContextWithPlants);
+    const user = userEvent.setup();
+
+    renderWaterMultiplePlantModal();
+
+    const checkboxes = screen.getAllByRole("checkbox");
+    await user.click(checkboxes[0]);
+    await user.click(checkboxes[1]);
+
+    expect(screen.getByText(/2 plants selected/i)).toBeInTheDocument();
+  });
+
+  it("should update feedback when unchecking", async () => {
+    vi.mocked(useGarden).mockReturnValue(mockGardenContextWithPlants);
+    const user = userEvent.setup();
+
+    renderWaterMultiplePlantModal();
+
+    const checkboxes = screen.getAllByRole("checkbox");
+    await user.click(checkboxes[0]);
+    await user.click(checkboxes[1]);
+
+    expect(screen.getByText(/2 plants selected/i)).toBeInTheDocument();
+
+    await user.click(checkboxes[0]);
+    expect(screen.getByText(/1 plant selected/i)).toBeInTheDocument();
+  });
+
+  it("should display all plants count when selecting all", async () => {
+    vi.mocked(useGarden).mockReturnValue(mockGardenContextWithPlants);
+    const user = userEvent.setup();
+
+    renderWaterMultiplePlantModal();
+
+    const selectAllButton = screen.getByRole("button", { name: /Select all/i });
+    await user.click(selectAllButton);
+
+    const totalPlants = mockUserPlants.length;
+
+    expect(
+      screen.getByText(new RegExp(`${totalPlants} plants selected`, "i")),
+    ).toBeInTheDocument();
+  });
+});
