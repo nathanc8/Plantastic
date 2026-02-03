@@ -8,7 +8,7 @@ vi.mock("../../context/GardenContext", () => ({
 import { http, HttpResponse } from "msw";
 import { server } from "../../mocks/server";
 import { TEST_API_BASE_URL } from "../../mocks/config";
-import { waitFor } from "@testing-library/react";
+import { fireEvent, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
@@ -238,15 +238,27 @@ describe("Watering multiple API call - Success", () => {
 describe("Date input interaction", () => {
   it("should allow changing the watering date", async () => {
     vi.mocked(useGarden).mockReturnValue(mockGardenContextWithPlants);
-    const user = userEvent.setup();
 
     renderWaterMultiplePlantModal();
 
-    const dateInput = screen.getByLabelText(/Watering date/i);
+    const dateInput = screen.getByLabelText(
+      /Watering date/i,
+    ) as HTMLInputElement;
 
-    await user.clear(dateInput);
-    await user.type(dateInput, "2025-01-15");
+    fireEvent.change(dateInput, { target: { value: "2025-01-15" } });
 
     expect(dateInput).toHaveValue("2025-01-15");
+  });
+  it("should not allow future dates", async () => {
+    vi.mocked(useGarden).mockReturnValue(mockGardenContextWithPlants);
+
+    renderWaterMultiplePlantModal();
+
+    const dateInput = screen.getByLabelText(
+      /Watering date/i,
+    ) as HTMLInputElement;
+
+    const today = new Date().toISOString().split("T")[0];
+    expect(dateInput.max).toBe(today);
   });
 });
