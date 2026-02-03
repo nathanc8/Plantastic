@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
+import { Toaster, toast } from "react-hot-toast";
 
 vi.mock("../../context/GardenContext", () => ({
   useGarden: vi.fn(),
@@ -19,7 +20,6 @@ import {
 } from "../contexts/mockGardenContext";
 import { mockUserPlants } from "../../mocks/mockUserPlantsData";
 import { useGarden } from "../../context/GardenContext";
-import { Toaster } from "react-hot-toast";
 
 // setup
 const renderWaterMultiplePlantModal = () => {
@@ -131,7 +131,7 @@ describe("Checkbox interactions water multiple plants", () => {
     );
   });
 
-  it("should uncheck all the checkboxes when clinking deselect all", async () => {
+  it("should uncheck all the checkboxes when clicking deselect all", async () => {
     vi.mocked(useGarden).mockReturnValue(mockGardenContextWithPlants);
     const user = userEvent.setup();
 
@@ -195,7 +195,6 @@ describe("Watering plants API call - Error", () => {
 
     await new Promise((resolve) => setTimeout(resolve, 500));
 
-
     expect(refreshGarden).not.toHaveBeenCalled();
     expect(mockOnClose).not.toHaveBeenCalled();
   });
@@ -211,7 +210,7 @@ describe("Watering multiple API call - Success", () => {
       isLoading: false,
     });
   });
-  
+
   it("should water the selected plant successfully", async () => {
     const user = userEvent.setup();
 
@@ -233,5 +232,21 @@ describe("Watering multiple API call - Success", () => {
       },
       { timeout: 3000 },
     );
+  });
+});
+
+describe("Date input interaction", () => {
+  it("should allow changing the watering date", async () => {
+    vi.mocked(useGarden).mockReturnValue(mockGardenContextWithPlants);
+    const user = userEvent.setup();
+
+    renderWaterMultiplePlantModal();
+
+    const dateInput = screen.getByLabelText(/Watering date/i);
+
+    await user.clear(dateInput);
+    await user.type(dateInput, "2025-01-15");
+
+    expect(dateInput).toHaveValue("2025-01-15");
   });
 });
