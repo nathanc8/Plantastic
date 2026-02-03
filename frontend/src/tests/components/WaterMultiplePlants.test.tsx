@@ -262,3 +262,49 @@ describe("Date input interaction", () => {
     expect(dateInput.max).toBe(today);
   });
 });
+
+describe("Loading state during submission", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.mocked(useGarden).mockReturnValue({
+      plants: mockUserPlants,
+      refreshGarden: vi.fn(),
+      isLoading: false,
+    });
+    server.use(
+      http.patch(
+        `${TEST_API_BASE_URL}/api/user-plants/water-multiples`,
+        async () => {
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+          return HttpResponse.json({ message: "Success" }, { status: 200 });
+        },
+      ),
+    );
+  });
+
+  it("should show 'Watering...' text and disable button while submitting", async () => {
+    const user = userEvent.setup();
+
+    renderWaterMultiplePlantModal();
+
+    const checkboxes = screen.getAllByRole("checkbox");
+    await user.click(checkboxes[0]);
+
+    const waterButton = screen.getByRole("button", { name: /Water 1 plant/i });
+
+    await user.click(waterButton);
+
+    screen.debug();
+
+    await waitFor(
+      () => {
+        expect(
+          screen.getByRole("button", { name: /Watering/i }),
+        ).toBeInTheDocument();
+      },
+      { timeout: 1000 },
+    );
+    const submittingButton = screen.getByRole("button", { name: /Watering/i });
+    expect(submittingButton).toHaveAttribute("aria-disabled", "true");
+  });
+});
