@@ -24,6 +24,7 @@ export default function InputField({
   max,
 }: InputFieldProps) {
   const [showPassword, setShowPassword] = useState(false);
+  const inputId = `input-${register.name}`;
 
   const inputType = showPasswordToggle
     ? showPassword
@@ -33,11 +34,15 @@ export default function InputField({
 
   return (
     <div className="mb-4">
-      <label className="block text-sm font-bold text-text-secondary font-bellota mb-1">
+      <label
+        className="block text-sm font-bold text-text-secondary font-bellota mb-1"
+        htmlFor={inputId}
+      >
         {label}
       </label>
       <div className="relative">
         <input
+          id={inputId}
           type={inputType}
           placeholder={placeholder}
           {...register}

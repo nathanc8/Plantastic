@@ -101,9 +101,12 @@ describe("Checkbox interactions water multiple plants", () => {
     await user.click(checkboxes[0]);
 
     expect(checkboxes[0]).not.toBeChecked();
-    expect(
-      screen.getByRole("button", { name: /Water your plants/i }),
-    ).toBeDisabled();
+
+    const submitButton = screen.getByRole("button", {
+      name: /Water your plants/i,
+    });
+
+    expect(submitButton).toHaveAttribute("aria-disabled", "true");
   });
 
   it("should check all the checkboxes when clinking select all", async () => {
@@ -373,5 +376,69 @@ describe("Selection feddback display", () => {
     expect(
       screen.getByText(new RegExp(`${totalPlants} plants selected`, "i")),
     ).toBeInTheDocument();
+  });
+
+  describe("Keyboard accessibility", () => {
+    it("should check checkbox when pressing space", async () => {
+      vi.mocked(useGarden).mockReturnValue(mockGardenContextWithPlants);
+      const user = userEvent.setup();
+
+      renderWaterMultiplePlantModal();
+
+      const checkboxes = screen.getAllByRole("checkbox");
+
+      checkboxes[0].focus();
+      await user.keyboard(" ");
+      expect(checkboxes[0]).toBeChecked();
+    });
+
+    it("should uncheck checkbox when pressing space on checked checkbox", async () => {
+      vi.mocked(useGarden).mockReturnValue(mockGardenContextWithPlants);
+      const user = userEvent.setup();
+
+      renderWaterMultiplePlantModal();
+
+      const checkboxes = screen.getAllByRole("checkbox");
+
+      checkboxes[0].focus();
+      await user.keyboard(" ");
+      expect(checkboxes[0]).toBeChecked();
+
+      await user.keyboard(" ");
+      expect(checkboxes[0]).not.toBeChecked();
+    });
+  });
+});
+
+describe("Submit button accessibility", () => {
+  it("should keep button focusable when disable", () => {
+    vi.mocked(useGarden).mockReturnValue(mockGardenContextWithPlants);
+
+    renderWaterMultiplePlantModal();
+
+    const submitButton = screen.getByRole("button", {
+      name: /Water your plants/i,
+    });
+
+    expect(submitButton).toHaveAttribute("aria-disabled", "true");
+    expect(submitButton).not.toHaveAttribute("disabled");
+  });
+
+  it("should not submit when cliking disabled button", async () => {
+    vi.mocked(useGarden).mockReturnValue(mockGardenContextWithPlants);
+    const user = userEvent.setup();
+
+    const { mockOnClose } = renderWaterMultiplePlantModal();
+
+    const submitButton = screen.getByRole("button", {
+      name: /Water your plants/i,
+    });
+
+    await user.click(submitButton);
+
+    const { refreshGarden } = vi.mocked(useGarden).mock.results[0].value;
+
+    expect(refreshGarden).not.toHaveBeenCalled();
+    expect(mockOnClose).not.toHaveBeenCalled();
   });
 });
