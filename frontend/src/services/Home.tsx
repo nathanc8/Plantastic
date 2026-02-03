@@ -12,7 +12,7 @@ export default function Home() {
     return (
       <BackgroundWrapper>
         <div className="flex items-center justify-center h-screen">
-          <p className="text-gray-500"> ⏳ Loading...</p>
+          <p className="text-text-secondary"> ⏳ Loading...</p>
         </div>
       </BackgroundWrapper>
     );
@@ -27,9 +27,7 @@ export default function Home() {
           {plants.length > 0 ? (
             plants.map((plant) => <PlantCard key={plant.id} plant={plant} />)
           ) : (
-            <p className="text-gray-500">
-              No plants yet. Add your first plant!
-            </p>
+            <p className="text-white">No plants yet. Add your first plant!</p>
           )}
         </div>
       </main>

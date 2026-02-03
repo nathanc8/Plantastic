@@ -40,8 +40,8 @@ export default function PlantDetailsModal({ plantId }: { plantId: number }) {
 
   return (
     <div>
-      {isLoading && <p className="text-gray-500"> ⏳ Loading...</p>}
-      {error && <p className="text-red-400 mt-4">Error: {error}</p>}
+      {isLoading && <p className="text-text-placeholder"> ⏳ Loading...</p>}
+      {error && <p className="text-text-error mt-4">Error: {error}</p>}
       {!isLoading && !error && plantDetails && (
         <>
           <div>
@@ -84,13 +84,13 @@ export default function PlantDetailsModal({ plantId }: { plantId: number }) {
           <div className="grid grid-cols-2 content-center gap-4">
             <button
               onClick={() => setIsWaterModalOpen(true)}
-              className={`${baseButtonClass} bg-[#4f674f] hover:bg-[#232c23]`}
+              className={`${baseButtonClass} bg-sage hover:bg-sage-dark`}
             >
               Water the plant
             </button>
             <button
               onClick={() => setIsDeleteModalOpen(true)}
-              className={`${baseButtonClass} bg-[#8B4509] hover:bg-[#7A3D08]`}
+              className={`${baseButtonClass} bg-clay hover:bg-clay-dark`}
             >
               Delete this plant
             </button>

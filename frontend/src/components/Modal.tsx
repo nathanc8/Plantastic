@@ -99,13 +99,13 @@ export default function Modal({
         ref={modalRef}
         role="dialog"
         aria-modal="true"
-        className={`bg-amber-50/95 rounded-lg p-4 sm:p-6 md:p-8 w-full ${sizeClasses[size]} max-h-[90vh] overflow-y-auto relative shadow-xl font-bellota mx-4 sm:mx-6`}
+        className={`bg-linen rounded-lg p-4 sm:p-6 md:p-8 w-full ${sizeClasses[size]} max-h-[90vh] overflow-y-auto relative shadow-xl font-bellota mx-4 sm:mx-6`}
         onClick={(e) => e.stopPropagation()}
       >
         <button
           ref={closeButtonRef}
           aria-label="Close modal"
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none rounded"
+          className="absolute top-4 right-4 text-text-placeholder hover:text-text-secondary focus:ring-2 focus:ring-focus focus:outline-none rounded"
           onClick={onClose}
         >
           <FaWindowClose className="w-6 h-6" />

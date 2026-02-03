@@ -91,7 +91,7 @@ export const WaterMultiplePlantsModal = ({
                   onChange={(e) =>
                     handleCheckboxChange(plant.id, e.target.checked)
                   }
-                  className="w-4 h-4 mr-3 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  className="w-4 h-4 mr-3 focus:ring-2 focus:ring-focus focus:ring-offset-2"
                 />
                 <label
                   htmlFor={`plant-${plant.id}`}
@@ -99,9 +99,11 @@ export const WaterMultiplePlantsModal = ({
                 >
                   <span className="font-medium">{plant.nickname}</span>
                   {", "}
-                  <span className="text-gray-600">{plant.commonName}</span>
+                  <span className="text-text-secondary">
+                    {plant.commonName}
+                  </span>
                   {" - "}
-                  <span className="text-sm text-gray-500">
+                  <span className="text-sm text-text-secondary">
                     Last watering: {plant.lastWatering}
                   </span>
                 </label>
@@ -116,7 +118,7 @@ export const WaterMultiplePlantsModal = ({
         <div className="flex-1">
           <label
             htmlFor="watering-date"
-            className="block text-sm font-medium text-gray-900 mb-1"
+            className="block text-sm font-medium text-text-secondary mb-1"
           >
             Watering date
           </label>
@@ -126,12 +128,12 @@ export const WaterMultiplePlantsModal = ({
             value={wateringDate.toISOString().split("T")[0]}
             max={today}
             onChange={(e) => setWateringDate(new Date(e.target.value))}
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-focus"
           />
         </div>
         <button
           onClick={handleSelectAll}
-          className="px-4 py-2 bg-[#4F674F] text-white font-montserrat rounded hover:bg-green-950 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          className="px-4 py-2 bg-sage text-white font-montserrat rounded hover:bg-sage-dark focus:ring-2 focus:ring-focus focus:outline-none"
           aria-label={
             selectedPlantIds.length === plants.length
               ? "Deselect all"
@@ -153,7 +155,7 @@ export const WaterMultiplePlantsModal = ({
           handleWatering();
         }}
         aria-disabled={selectedPlantIds.length === 0 || isSubmitting}
-        className={`w-full font-montserrat font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-6 mb-1 text-white bg-[#4F674F] hover:bg-green-950 focus:ring-2 focus:ring-blue-500 focus:outline-none ${
+        className={`w-full font-montserrat font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-6 mb-1 text-white bg-sage hover:bg-sage-dark focus:ring-2 focus:ring-focus focus:outline-none ${
           selectedPlantIds.length === 0 || isSubmitting
             ? "opacity-50 cursor-not-allowed"
             : ""

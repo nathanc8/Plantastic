@@ -45,19 +45,19 @@ export const ProfileMenu = ({
 
         {isOpen && (
           <div
-            className="absolute bottom-full mb-2 right-0 w-40 rounded-md shadow-lg bg-amber-50/95 font-bellota ring-1 ring-black ring-opacity-5 z-30"
+            className="absolute bottom-full mb-2 right-0 w-40 rounded-md shadow-lg bg-linen font-bellota ring-1 ring-black ring-opacity-5 z-30"
             role="menu"
           >
             <div className="py-1 flex flex-col items-center">
               <button
                 onClick={() => setIsOpen(false)}
-                className="block w-full text-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-300"
+                className="block w-full text-center px-4 py-2 text-sm text-text-secondary hover:bg-gray-300"
               >
                 Profile
               </button>
               <button
                 onClick={() => setIsOpen(false)}
-                className="block w-full text-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-300"
+                className="block w-full text-center px-4 py-2 text-sm text-text-secondary hover:bg-gray-300"
               >
                 Settings
               </button>

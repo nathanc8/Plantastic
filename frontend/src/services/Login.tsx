@@ -131,7 +131,7 @@ export default function Login() {
                 <div
                   role="alert"
                   aria-live="assertive"
-                  className="text-red-500 block mt-2"
+                  className="text-text-error block mt-2"
                 >
                   {error}
                 </div>

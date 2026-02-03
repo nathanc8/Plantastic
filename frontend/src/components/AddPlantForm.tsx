@@ -126,7 +126,7 @@ export default function AddPlantForm({ onClose }: FormProps) {
         {/* PLANT SEARCH */}
         <label
           htmlFor="plant-search"
-          className="block text-sm font-bold text-gray-900 font-montserrat mb-1"
+          className="block text-sm font-bold text-text-secondary font-bellota mb-1"
         >
           Search a plant:
         </label>
@@ -194,7 +194,7 @@ export default function AddPlantForm({ onClose }: FormProps) {
             }, 200);
           }}
           type="search"
-          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 placeholder:italic placeholder:text-gray-500"
+          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 placeholder:italic placeholder:text-text-placeholder"
         />
         <>
           {suggestions.length > 0 && (
@@ -211,7 +211,7 @@ export default function AddPlantForm({ onClose }: FormProps) {
                   aria-selected={index === activeIndex}
                   className={`p-2 cursor-pointer ${
                     index === activeIndex
-                      ? "bg-blue-100 border-l-4 border-blue-500"
+                      ? "bg-blue-100 border-l-4 border-focus"
                       : "hover:bg-gray-100"
                   }`}
                   onClick={(e) => {
@@ -226,7 +226,7 @@ export default function AddPlantForm({ onClose }: FormProps) {
                     setActiveIndex(-1);
                   }}
                 >
-                  <span className="text-gray-800 text-sm flex">
+                  <span className="text-text-secondary text-sm flex">
                     {plant.commonName} - {plant.scientificName}{" "}
                     <img
                       className="h-16 w-16"
@@ -242,7 +242,7 @@ export default function AddPlantForm({ onClose }: FormProps) {
           {suggestions.length === 0 &&
             searchValue.length >= 3 &&
             !isPlantSelected && (
-              <p className="text-gray-500 text-sm p-4 text-center">
+              <p className="text-text-placeholder text-sm p-4 text-center">
                 No results found!
               </p>
             )}
@@ -251,9 +251,10 @@ export default function AddPlantForm({ onClose }: FormProps) {
         {/* PICTURE  */}
         <label
           htmlFor="plant-picture"
-          className="block text-sm font-bold text-gray-900 font-montserrat mb-1"
+          className="block text-sm font-bold text-text-secondary font-bellota mb-1"
         >
-          Picture: <span className="text-gray-500 text-xs">(Max 10MB)</span>
+          Picture:{" "}
+          <span className="text-text-placeholder text-xs">(Max 10MB)</span>
         </label>
         <div className="h-36 w-36">
           {imageToDisplay && <img src={imageToDisplay} alt="Plant" />}
@@ -321,7 +322,7 @@ export default function AddPlantForm({ onClose }: FormProps) {
         <div
           role="alert"
           aria-live="assertive"
-          className="bg-red-100 text-red-700 p-3 rounded text-sm"
+          className="bg-red-100 text-text-error p-3 rounded text-sm"
         >
           {apiMessage}
         </div>
@@ -331,7 +332,7 @@ export default function AddPlantForm({ onClose }: FormProps) {
       <button
         type="submit"
         id="submit-button"
-        className="w-full bg-red bg-[#4f674f] text-white py-2 rounded-lg hover:bg-[#374737] font font-montserrat"
+        className="w-full bg-red bg-sage text-white py-2 rounded-lg hover:bg-sage-dark font font-montserrat"
       >
         Send
       </button>

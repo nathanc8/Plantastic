@@ -25,14 +25,14 @@ export default function BottomNavigation({ onRefresh }: BottomNavigationProps) {
   const getButtonClass = (path: string) => {
     const baseClass =
       "group hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center gap-1";
-    const activeClass = isActive(path) ? "text-yellow-200" : "";
+    const activeClass = isActive(path) ? "text-active" : "";
     return `${baseClass} ${activeClass}`;
   };
 
   const getIconClass = (path: string) => {
     const baseClass =
       "w-8 h-8 md:w-10 md:h-10 lg:w-10 lg:h-10 xl:w-10 xl:h-10 2xl:w-14 2xl:h-14 transition-all group-hover:scale-110";
-    const activeClass = isActive(path) ? "text-yellow-200 scale-110" : "";
+    const activeClass = isActive(path) ? "text-active scale-110" : "";
     return `${baseClass} ${activeClass}`;
   };
 
@@ -46,7 +46,7 @@ export default function BottomNavigation({ onRefresh }: BottomNavigationProps) {
     >
       <div
         id="right_navbar"
-        className="relative z-20 bg-[#2D3D2D] grid grid-cols-2 place-items-center rounded-l-[2rem] pl-4"
+        className="relative z-20 bg-forest grid grid-cols-2 place-items-center rounded-l-[2rem] pl-4"
       >
         <button
           id="digital-garden-button"
@@ -91,7 +91,7 @@ export default function BottomNavigation({ onRefresh }: BottomNavigationProps) {
       )}
       <div
         id="left_navbar"
-        className="relative z-20 bg-[#2D3D2D] grid grid-cols-2 place-items-center rounded-r-[2rem] pr-4 "
+        className="relative z-20 bg-forest grid grid-cols-2 place-items-center rounded-r-[2rem] pr-4 "
       >
         <button
           id="advices_button"
@@ -112,7 +112,7 @@ export default function BottomNavigation({ onRefresh }: BottomNavigationProps) {
       <div
         id="middle_navbar"
         className="
-        absolute z-10 bottom-0 h-full left-1/2 -translate-x-1/2 w-1/2 bg-[#2D3D2D] pointer-events-none "
+        absolute z-10 bottom-0 h-full left-1/2 -translate-x-1/2 w-1/2 bg-forest pointer-events-none "
         aria-hidden="true"
       ></div>
     </nav>

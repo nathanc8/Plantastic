@@ -1,9 +1,9 @@
 import clsx from "clsx";
 
 type SubmitButtonProps = {
-    loading?: boolean;
-    text: string;
-}
+  loading?: boolean;
+  text: string;
+};
 
 export default function SubmitButton({ loading, text }: SubmitButtonProps) {
   return (
@@ -12,8 +12,8 @@ export default function SubmitButton({ loading, text }: SubmitButtonProps) {
       disabled={loading}
       className={clsx(
         "w-full font-montserrat font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-3 mb-1 transition-all duration-200",
-        "text-white bg-[#4F674F] hover:bg-green-950",
-        loading && "opacity-60 cursor-not-allowed"
+        "text-white bg-sage hover:bg-sage-dark",
+        loading && "opacity-60 cursor-not-allowed",
       )}
     >
       {loading ? "Loading..." : text}

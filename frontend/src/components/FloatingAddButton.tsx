@@ -37,7 +37,7 @@ export default function FloatingAddButton({
   }, [isMenuOpen]);
 
   const addButtonClass =
-    "h-16 w-16 sm:h-20 sm:w-20 xl:h-24 xl:w-24 2xl:h-28 2xl:w-28 absolute -top-6 md:-top-10 xl:-top-12  2xl:-top-14 left-1/2 -translate-x-1/2  bg-[#2D3D2D] rounded-full z-30";
+    "h-16 w-16 sm:h-20 sm:w-20 xl:h-24 xl:w-24 2xl:h-28 2xl:w-28 absolute -top-6 md:-top-10 xl:-top-12  2xl:-top-14 left-1/2 -translate-x-1/2  bg-forest rounded-full z-30";
 
   const iconClass =
     "w-8 h-8 md:w-10 md:h-10 lg:w-10 lg:h-10 xl:w-10 xl:h-10 2xl:w-14 2xl:h-14 transition-all group-hover:scale-110";
@@ -56,8 +56,8 @@ export default function FloatingAddButton({
           }}
           className="
 					rounded-full w-full h-full 
-					bg-gradient-to-br from-[#2D3D2D] from-50% to-[#232e23]
-					hover:from-[#232e23] hover:to-[#2D3D2D]
+					bg-gradient-to-br from-forest from-50% to-[#232e23]
+					hover:from-[#232e23] hover:to-forest
 					shadow-lg hover:shadow-xl
 					hover:-translate-y-1
 					transition duration-700
@@ -67,7 +67,7 @@ export default function FloatingAddButton({
         >
           <PiPlantFill
             className={`${iconClass} transition-colors ${
-              isMenuOpen ? "text-yellow-200" : ""
+              isMenuOpen ? "text-active" : ""
             }`}
           />
         </button>
@@ -98,8 +98,8 @@ export default function FloatingAddButton({
                   className="
             w-12 h-12 sm:w-14 sm:h-14 xl:w-16 xl:h-16
             rounded-full 
-            bg-gradient-to-br from-[#2D3D2D] to-[#1a221a]
-            hover:from-[#1a221a] hover:to-[#2D3D2D]
+            bg-gradient-to-br from-forest to-[#1a221a]
+            hover:from-[#1a221a] hover:to-forest
             shadow-lg hover:shadow-xl
             transition-colors duration-300
             flex items-center justify-center

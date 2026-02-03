@@ -67,19 +67,19 @@ export default function Encyclopedia() {
             placeholder="Search a plant by common name..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full max-w-lg p-3 text-white bg-[#2D3D2D] border border-gray-600 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-200 opacity-95"
+            className="w-full max-w-lg p-3 text-white bg-forest border border-gray-600 rounded-lg placeholder-text-placeholder focus:outline-none focus:ring-2 focus:ring-active opacity-95"
           />
         </div>
         <a
           href="#navbar"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4° focus:left-4 focus:z-50 focus:bg-yellow-200 focus:text-black focus:px-4 focus:py-2 focus:rounded"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4° focus:left-4 focus:z-50 focus:bg-active focus:text-black focus:px-4 focus:py-2 focus:rounded"
         >
           Skip to navigation
         </a>
         {isLoading && <p className="text-white mt-4">Loading plants...</p>}
-        {error && <p className="text-red-400 mt-4">Error: {error}</p>}
+        {error && <p className="text-text-error mt-4">Error: {error}</p>}
         {!isLoading && !error && filteredPlants.length === 0 && (
-          <p className="text-gray-400 mt-6">No plants found 🌱</p>
+          <p className="text-text-secondary mt-6">No plants found 🌱</p>
         )}
         {!isLoading && !error && (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full ">

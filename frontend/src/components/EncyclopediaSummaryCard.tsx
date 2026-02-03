@@ -25,7 +25,7 @@ export default function PlantCardEncyclopedia({
           onClick();
         }
       }}
-      className="w-full h-full flex flex-col bg-amber-50/95 rounded-lg p-4 shadow-lg transform transition-all hover:-translate-y-1 duration-300 hover:shadow-xl cursor-pointer"
+      className="w-full h-full flex flex-col bg-linen rounded-lg p-4 shadow-lg transform transition-all hover:-translate-y-1 duration-300 hover:shadow-xl cursor-pointer"
     >
       <div
         className="w-full h-48 bg-cover bg-center rounded-t-lg"
@@ -33,15 +33,19 @@ export default function PlantCardEncyclopedia({
       />
       <div className="flex-1 flex flex-col font-bellota p-2 justify-between">
         <div>
-          <h3 className="text-lg font-bold text-gray-900 truncate">
+          <h3 className="text-lg font-bold text-text-primary truncate">
             {plant.commonName}
           </h3>
-          <p className="text-sm text-gray-600 italic truncate">
+          <p className="text-sm text-text-secondary italic truncate">
             {plant.scientificName}
           </p>
-          <p className="text-sm text-gray-600 mt-2">{descriptionSnippet}</p>
+          <p className="text-sm text-text-secondary mt-2">
+            {descriptionSnippet}
+          </p>
         </div>
-        <p className="text-sm text-gray-600 mt-2">Watering: {plant.watering}</p>
+        <p className="text-sm text-text-secondary mt-2">
+          Watering: {plant.watering}
+        </p>
       </div>
     </div>
   );

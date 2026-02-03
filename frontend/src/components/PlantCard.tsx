@@ -8,7 +8,7 @@ export default function PlantCard({ plant }: { plant: UserPlant }) {
   return (
     <div
       id="plant-card"
-      className="w-full max-w-sm h-36 flex bg-amber-50/95 rounded-lg p-2 shadow-lg transform transition-all hover:-translate-y-1 duration-300 hover:shadow"
+      className="w-full max-w-sm h-36 flex bg-linen rounded-lg p-2 shadow-lg transform transition-all hover:-translate-y-1 duration-300 hover:shadow"
     >
       <div
         id="plant-img"
@@ -26,22 +26,22 @@ export default function PlantCard({ plant }: { plant: UserPlant }) {
       >
         {/* Infos compactes */}
         <div>
-          <h3 className="text-sm font-bold text-gray-900 truncate">
+          <h3 className="text-sm font-bold text-text-primary truncate">
             {plant.nickname}
           </h3>
-          <p className="text-xs text-gray-600 italic truncate">
+          <p className="text-xs text-text-secondary italic truncate">
             Common name: {plant.commonName}
           </p>
-          <p className="text-xs text-gray-500 truncate">
+          <p className="text-xs text-text-secondary truncate">
             Last watering: {plant.lastWatering}
           </p>
-          <p className="text-xs text-gray-500 truncate">
+          <p className="text-xs text-text-secondary truncate">
             Next watering: {plant.nextWatering}
           </p>
         </div>
         <button
           onClick={() => setIsModalOpen(true)}
-          className="mt-1 px-3 py-1 text-xs bg-[#4f674f] text-white rounded hover:bg-[#232c23] w-full"
+          className="mt-1 px-3 py-1 text-xs bg-sage text-white rounded hover:bg-sage-dark w-full"
         >
           Consult
         </button>
