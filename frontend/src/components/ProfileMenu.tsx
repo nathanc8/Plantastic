@@ -54,14 +54,14 @@ export const ProfileMenu = ({
             <div className="py-1 flex flex-col items-center">
               <button
                 onClick={() => setIsOpen(false)}
-                className="block w-full text-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-300"
+                className="block w-full text-center px-4 py-2 text-sm text-text-secondary hover:bg-gray-300"
                 role="menuitem"
               >
                 Profile
               </button>
               <button
                 onClick={() => setIsOpen(false)}
-                className="block w-full text-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-300"
+                className="block w-full text-center px-4 py-2 text-sm text-text-secondary hover:bg-gray-300"
                 role="menuitem"
               >
                 Settings

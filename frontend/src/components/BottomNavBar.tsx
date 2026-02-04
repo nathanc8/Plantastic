@@ -61,7 +61,7 @@ export default function BottomNavigation({ onRefresh }: BottomNavigationProps) {
           onClick={() => navigate("/encyclopedia")}
           id="encyclopedia_button"
           className={getButtonClass("/encyclopedia")}
-          aria-lable="encyclopedia"
+          aria-label="encyclopedia"
         >
           <BiSolidBookBookmark className={getIconClass("/encyclopedia")} />
           <span className={textClass}>Encyclopedia</span>

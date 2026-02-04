@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { Toaster, toast } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 vi.mock("../../context/GardenContext", () => ({
   useGarden: vi.fn(),
@@ -438,7 +438,7 @@ describe("Submit button accessibility", () => {
 
     const { refreshGarden } = vi.mocked(useGarden).mock.results[0].value;
 
-    expect(refreshGarden).not.toHaveBeenCalled();
     expect(mockOnClose).not.toHaveBeenCalled();
+    expect(refreshGarden).not.toHaveBeenCalled();
   });
 });

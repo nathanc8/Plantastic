@@ -7,6 +7,7 @@ export default function PlantCard({ plant }: { plant: UserPlant }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <div
+      data-testid="plant-card"
       id="plant-card"
       className="w-full max-w-sm h-36 flex bg-linen rounded-lg p-2 shadow-lg transform transition-all hover:-translate-y-1 duration-300 hover:shadow"
     >

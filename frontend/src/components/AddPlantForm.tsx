@@ -21,7 +21,6 @@ export default function AddPlantForm({ onClose }: FormProps) {
   );
   const [userPictureFile, setUserPictureFile] = useState<File | null>(null);
   const [userPicturePreview, setUserPicturePreview] = useState<string>("");
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [apiMessage, setApiMessage] = useState<ReactNode>(null);
   const [isPlantSelected, setIsPlantSelected] = useState(false);
   const { refreshGarden } = useGarden();
