@@ -50,67 +50,25 @@ export default function BottomNavigation({ onRefresh }: BottomNavigationProps) {
       >
         <button
           id="digital-garden-button"
-          aria-label="Go to digital garden"
           onClick={() => navigate("/")}
           className={getButtonClass("/")}
           aria-label="digital garden"
         >
-<<<<<<< HEAD
           <PiPlantBold className={getIconClass("/")} />
           <span className={textClass}>Digital garden</span>
-=======
-          <PiPlantBold aria-hidden="true" className={getIconClass("/")} />
-          <p className={textClass}>Digital garden</p>
->>>>>>> 1aff34f (Tests for rendering, checkboxes display and interactions, API call, successfull watering)
         </button>
         <button
           onClick={() => navigate("/encyclopedia")}
           id="encyclopedia_button"
-          aria-label="Go to encyclopedia"
           className={getButtonClass("/encyclopedia")}
           aria-lable="encyclopedia"
         >
-<<<<<<< HEAD
           <BiSolidBookBookmark className={getIconClass("/encyclopedia")} />
           <span className={textClass}>Encyclopedia</span>
         </button>
       </div>
-=======
-          <BiSolidBookBookmark
-            aria-hidden="true"
-            className={getIconClass("/encyclopedia")}
-          />
-          <p className={textClass}>Encyclopedia</p>
-        </button>
-      </div>
-      <div
-        id="left_navbar"
-        className="relative z-20 bg-[#2D3D2D] grid grid-cols-2 place-items-center rounded-r-[2rem] pr-4 "
-      >
-        <button
-          id="advices_button"
-          aria-label="Go to Advices"
-          onClick={() => navigate("/advices")}
-          className={getButtonClass("/advices")}
-          title="advices"
-        >
-          <HiOutlineLightBulb
-            aria-hidden="true"
-            className={getIconClass("/advices")}
-          />
-          <p className={textClass}>Advices</p>
-        </button>
-
-        <ProfileMenu
-          aria-hidden="true"
-          iconClassName={getIconClass("/profile")}
-          textClassName={textClass}
-        />
-      </div>
->>>>>>> 1aff34f (Tests for rendering, checkboxes display and interactions, API call, successfull watering)
       {isActive("/") && (
         <FloatingAddButton
-          aria-hidden="true"
           menuOptions={[
             {
               FormComponent: AddPlantForm,
@@ -129,11 +87,7 @@ export default function BottomNavigation({ onRefresh }: BottomNavigationProps) {
       {isActive("/encyclopedia") && isAdmin && (
         <FloatingAddButton
           FormComponent={(props) => (
-            <AddEncyclopediaPlantForm
-              {...props}
-              onRefresh={onRefresh}
-              aria-label="add a plant to the encyclopedia"
-            />
+            <AddEncyclopediaPlantForm {...props} onRefresh={onRefresh} />
           )}
         ></FloatingAddButton>
       )}
