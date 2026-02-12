@@ -411,6 +411,10 @@ describe("Selection feddback display", () => {
 });
 
 describe("Submit button accessibility", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
   it("should keep button focusable when disable", () => {
     vi.mocked(useGarden).mockReturnValue(mockGardenContextWithPlants);
 

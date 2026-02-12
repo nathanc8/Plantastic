@@ -21,5 +21,11 @@ setup("authenticate", async ({ page }) => {
 
   await page.waitForTimeout(1000);
 
+  const cookies = await page.context().cookies();
+  console.log(
+    "Session ID saved:",
+    cookies.find((c) => c.name === "JSESSIONID")?.value,
+  );
+
   await page.context().storageState({ path: authFile });
 });

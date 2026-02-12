@@ -23,7 +23,7 @@ const renderAddPlantForm = () => {
           <AddPlantForm onClose={mockOnClose} />
         </GardenProvider>
       </AuthProvider>
-    </MemoryRouter>
+    </MemoryRouter>,
   );
 };
 
@@ -49,7 +49,7 @@ it("should show plant suggestions when typing", async () => {
   server.use(
     http.get(`${TEST_API_BASE_URL}/api/plants/summaries`, () => {
       return HttpResponse.json(mockPlants, { status: 200 });
-    })
+    }),
   );
 
   renderAddPlantForm();
@@ -70,7 +70,7 @@ it("should debounce search and only call API after 300ms with 3+ chars", async (
   server.use(
     http.get(`${TEST_API_BASE_URL}/api/plants/summaries`, () => {
       return HttpResponse.json(mockPlants, { status: 200 });
-    })
+    }),
   );
 
   renderAddPlantForm();

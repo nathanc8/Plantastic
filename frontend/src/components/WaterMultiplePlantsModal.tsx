@@ -24,7 +24,7 @@ export const WaterMultiplePlantsModal = ({
   };
 
   const handleWatering = async () => {
-    if (isSubmitting) return;
+    if (selectedPlantIds.length === 0 || isSubmitting) return;
     setIsSubmitting(true);
 
     try {
@@ -148,7 +148,7 @@ export const WaterMultiplePlantsModal = ({
 
       <button
         onClick={(e) => {
-          if (selectedPlantIds.length === 0) {
+          if (selectedPlantIds.length === 0 || isSubmitting) {
             e.preventDefault();
             return;
           }
