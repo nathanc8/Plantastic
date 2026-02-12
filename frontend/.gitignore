@@ -35,3 +35,4 @@ coverage/
 /playwright/.cache/
 /playwright/.auth/
 .e2e/.auth/
+coverage/

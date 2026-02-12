@@ -289,7 +289,7 @@ export default function AddPlantForm({ onClose }: FormProps) {
 
         {/* NICKNAME  */}
         <InputField
-          label="Name"
+          label="Nickname"
           type="text"
           placeholder="Enter plant nickname"
           register={register("nickname")}

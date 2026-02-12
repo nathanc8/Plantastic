@@ -47,8 +47,7 @@ public class UserPlantService {
                     log.error("Plant not found with id: {}", request.getPlantId());
                     return new EntityNotFoundException("Plant not found with id: " + request.getPlantId());
                 });
-
-//        String userPlantImageUrl = cloudinaryService.uploadFileAndGetUrl(file, "user plants");
+        
       String userPlantImageUrl;
       if (file != null && !file.isEmpty()) {
         userPlantImageUrl = cloudinaryService.uploadFileAndGetUrl(file, "user plants");

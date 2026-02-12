@@ -31,11 +31,12 @@ const renderAddPlantForm = () => {
 describe("AddPlantForm", () => {
   it("should render the form", () => {
     renderAddPlantForm();
+    screen.debug();
 
     expect(screen.getByText(/Add a plant/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Search a plant:/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Picture/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Name/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Nickname/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Acquisition date/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Last watering date/i)).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /Send/i })).toBeInTheDocument();

@@ -5,8 +5,14 @@ import PlantDetailsModal from "./PlantDetailsModal";
 
 export default function PlantCard({ plant }: { plant: UserPlant }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const [year, month, day] = plant.nextWatering.split("-").map(Number);
+  const nextWateringDate = new Date(year, month - 1, day);
+  const isThirsty = nextWateringDate < today;
   return (
-    <div
+    <article
       data-testid="plant-card"
       id="plant-card"
       className="w-full max-w-sm h-36 flex bg-linen rounded-lg p-2 shadow-lg transform transition-all hover:-translate-y-1 duration-300 hover:shadow"
@@ -35,10 +41,16 @@ export default function PlantCard({ plant }: { plant: UserPlant }) {
           <p className="text-xs text-text-secondary truncate">
             Next watering: {plant.nextWatering}
           </p>
+          {isThirsty && (
+            <p className="text-text-error font-bold" role="alert">
+              I feel thirsty !
+            </p>
+          )}
         </div>
         <button
           onClick={() => setIsModalOpen(true)}
           className="mt-1 px-3 py-1 text-xs bg-sage text-white rounded hover:bg-sage-dark w-full"
+          aria-label={`Consult ${plant.nickname} details`}
         >
           Consult
         </button>
@@ -50,6 +62,6 @@ export default function PlantCard({ plant }: { plant: UserPlant }) {
           <PlantDetailsModal plantId={plant.id}></PlantDetailsModal>
         </Modal>
       </div>
-    </div>
+    </article>
   );
 }

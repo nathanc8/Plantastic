@@ -36,10 +36,10 @@ public class User {
     @Column
     private UserRole role;
 
-    @Column (name = "created_at",nullable = false)
+    @Column (name = "created_at",nullable = false, columnDefinition = "DATETIME")
     private LocalDateTime createdAt;
 
-    @Column (name = "updated_at",nullable = false)
+    @Column (name = "updated_at",nullable = false, columnDefinition = "DATETIME")
     private LocalDateTime updatedAt;
 
     @Column(name = "last_login_at")
@@ -49,7 +49,7 @@ public class User {
     @Column (name = "notifications_preferences", nullable = true)
     private NotificationsPreferences notificationsPreferences;
 
-    @Column(name = "notifications_time")
+    @Column(name = "notifications_time", columnDefinition = "TIME")
     private LocalTime notificationsTime;
 
     @Column (name = "notifications_consent", nullable = false)
