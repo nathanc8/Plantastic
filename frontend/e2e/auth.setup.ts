@@ -5,7 +5,7 @@ const authFile = "e2e/.auth/user.json";
 setup("authenticate", async ({ page }) => {
   await page.goto("/login");
 
-  await page.fill("input[name='username']", "user");
+  await page.fill("input[name='username']", "username");
   await page.fill("input[name='password']", "User1234!");
 
   const loginPromise = page.waitForResponse(
@@ -20,12 +20,6 @@ setup("authenticate", async ({ page }) => {
   await page.waitForURL("/");
 
   await page.waitForTimeout(1000);
-
-  const cookies = await page.context().cookies();
-  console.log(
-    "Session ID saved:",
-    cookies.find((c) => c.name === "JSESSIONID")?.value,
-  );
 
   await page.context().storageState({ path: authFile });
 });

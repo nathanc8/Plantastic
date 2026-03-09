@@ -34,7 +34,7 @@ test.describe("Login Page", () => {
   });
 
   test("should login successfully", async ({ page }) => {
-    await page.locator("#input-username").fill("user");
+    await page.locator("#input-username").fill("username");
     await page.locator("#input-password").fill("User1234!");
     await page.click("button[type=submit]");
 

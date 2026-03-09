@@ -1,8 +1,8 @@
 {
   "cookies": [
     {
-      "name": "JSESSIONID",
-      "value": "22898AC25BE879D3824593651ABC93CD",
+      "name": "SESSION",
+      "value": "YjgyNDc1OTUtNDE5Ni00MjNlLWE3MmEtMDkyMWUwM2M1Yzk4",
       "domain": "localhost",
       "path": "/",
       "expires": -1,
