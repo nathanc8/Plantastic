@@ -31,7 +31,7 @@ public class UserPlantController {
 
     private final UserPlantService userPlantService;
 
-    @PostMapping(value = "/create-one", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+  @PostMapping(value = "/create-one", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> createOneUserPlant(
             @RequestPart("data") CreateUserPlantRequest request,
             @RequestPart(value = "file", required = false) MultipartFile file,
@@ -68,22 +68,24 @@ public class UserPlantController {
   public ResponseEntity<Map<String, String>> deleteOneUserPlant(@PathVariable("id") Long userPlantId) {
     log.debug("Deleting plant with id: {}", userPlantId);
 
+    String message = "message";
+    String success = "success";
     try {
       userPlantService.deleteUserPlantById(userPlantId);
       log.info("User plant (id: {}) has been successfully deleted", userPlantId);
 
       return ResponseEntity.ok(Map.of(
-        "message", "Plant deleted successfully",
-        "success", "true"
+        message, "Plant deleted successfully",
+        success, "true"
       ));
     } catch (EntityNotFoundException e) {
       log.warn("Plant with id {} deletion failed: {}", userPlantId, e.getMessage());
       return ResponseEntity.status(HttpStatus.NOT_FOUND)
-        .body(Map.of("message", e.getMessage(), "success", "false"));
+        .body(Map.of(message, e.getMessage(), success, "false"));
     } catch (Exception e) {
       log.error("Unexpected error deleting plant with id {}: ", userPlantId, e);
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-        .body(Map.of("message", "An unexpected error occurred", "success", "false"));
+        .body(Map.of(message, "An unexpected error occurred", success, "false"));
     }
   }
 }

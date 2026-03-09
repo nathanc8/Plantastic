@@ -14,9 +14,9 @@ public class UserUtil {
 
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
 
-    public static boolean isValidEmail(String input) {
-        return EMAIL_PATTERN.matcher(input).matches();
-    }
+  public static boolean isValidEmail(String input) {
+    return input != null && EMAIL_PATTERN.matcher(input).matches();
+  }
 
     public static Optional<User> findByUsernameOrEmail(UserRepository userRepository, String identifier) {
         if (isValidEmail(identifier)) {

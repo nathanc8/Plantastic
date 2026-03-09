@@ -1,18 +1,14 @@
 package com.plantastic.backend.dto.auth;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@RequiredArgsConstructor
 public class LoginRequest {
+    @NonNull
     private String usernameOrEmail;
+    @NonNull
     private String password;
-
-    public LoginRequest(String usernameOrEmail, String password) {
-        this.usernameOrEmail = usernameOrEmail;
-        this.password = password;
-    }
 }
