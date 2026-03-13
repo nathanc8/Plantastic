@@ -22,13 +22,21 @@ jobs:
           cd backend
           chmod +x mvnw
           ./mvnw spring-boot:run -Dspring-boot.run.profiles=e2e &
-          sleep 30
+          sleep 60
 
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
           cache-dependency-path: frontend/package-lock.json
+
+      - name: Wait for backend
+        run: |
+          for i in $(seq 1 30); do
+            curl -s http://127.0.0.1:8080/api/auth/login && break
+            echo "Waiting for backend... ($i)"
+            sleep 5
+          done
 
       - name: Install frontend dependencies
         run: |
