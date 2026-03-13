@@ -1,17 +1,8 @@
 import { test as setup } from "@playwright/test";
 
 const authFile = "e2e/.auth/user.json";
-const apiUrl = process.env.API_URL || "http://localhost:8080";
 
-setup("authenticate", async ({ page, request }) => {
-  await request.post(`${apiUrl}/api/auth/register`, {
-    data: {
-      username: "username",
-      email: "user@yopmail.com",
-      password: "User1234!",
-    },
-  });
-
+setup("authenticate", async ({ page }) => {
   await page.goto("/login");
 
   await page.fill("input[name='username']", "username");

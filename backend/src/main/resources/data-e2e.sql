@@ -1,3 +1,5 @@
+INSERT INTO users (username, email, password, role, notifications_consent, notifications_preferences, camera_consent, created_at, updated_at)
+VALUES ('username', 'user@yopmail.fr', '$2a$10$mpgNEUGaqL/QHbWa8pGZFecHScKIh7ITOHu92GcHI3S18M57.W4.q', 'ROLE_USER', false, 'STANDARD', false, '2025-09-19 00:00:00', '2025-09-19 00:00:00');
 
 INSERT INTO plants (api_id, common_name, scientific_name, family, description, care_level, image_url, watering, soil, light_exposure, growth_rate, poisonous_to_pet, watering_details, sunlight_details, pruning_details)
 VALUES
