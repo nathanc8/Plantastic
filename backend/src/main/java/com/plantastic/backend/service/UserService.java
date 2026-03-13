@@ -63,7 +63,7 @@ public class UserService {
             user.setUpdatedAt(LocalDateTime.now());
             user.setRole(UserRole.ROLE_USER);
             user.setNotificationsConsent(false);
-            user.setNotificationsPreferences(NotificationsPreferences.STANDARD);
+            user.setNotificationsPreferences(null);
             user.setCameraConsent(false);
             userRepository.save(user);
         }
