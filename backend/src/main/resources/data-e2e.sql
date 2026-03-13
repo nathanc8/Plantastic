@@ -1,0 +1,25 @@
+
+INSERT INTO plants (api_id, common_name, scientific_name, family, description, care_level, image_url, watering, soil, light_exposure, growth_rate, poisonous_to_pet, watering_details, sunlight_details, pruning_details)
+VALUES
+(425, 'Flowering Maple', 'Abutilon hybridum', 'Malvaceae', 'The Flowering Maple is an amazing plant species.', 'Medium', '', 'Frequent', '', 'full sun, part shade', 'Low', false, 'Should be watered 1-2 times per week.', 'Needs full sun for 6-8 hours per day.', 'Prune after flowering.'),
+(434, 'Jacob''s Coat', 'Acalypha wilkesiana', 'Euphorbiaceae', 'Jacob''s Coat is an amazing foliage plant.', 'Medium', '', 'Frequent', '', 'full sun, part shade', 'Low', false, 'Should be watered twice per week.', 'Requires 3 to 4 hours of direct sunlight.', 'Prune once a year in late winter.'),
+(540, 'Desert Rose', 'Adenium obesum', 'Apocynaceae', 'The Desert Rose adds vibrant color to any space.', '', '', 'Minimum', '', 'full sun', 'Low', false, 'Water about once a week.', 'Prefers 6+ hours of direct sunlight.', 'Prune lightly throughout growing season.'),
+(543, 'Maidenhair Fern', 'Adiantum capillus-veneris', 'Pteridaceae', 'A beautiful and unique species of fern.', 'Medium', '', 'Average', 'Clay, Sand', 'part shade, part sun/part shade', '', false, 'Water once or twice a week.', 'Prefers bright, indirect sunlight.', 'Prune in early spring or late fall.'),
+(855, 'Anthurium', 'Anthurium andraeanum', 'Araceae', 'Anthurium andraeanum is an amazing plant species.', 'Medium', '', 'Average', '', 'part sun/part shade', 'High', false, 'Water every 5 to 7 days.', 'Requires bright indirect light for 6-8 hours.', 'Prune sparingly.'),
+(728, 'Aloe vera', 'Aloe vera', 'Asphodelaceae', 'Aloe vera is known for its health benefits.', '', '', 'Minimum', 'Well-drained', 'full sun', 'High', false, 'Water once every 2 weeks.', 'Needs 4 to 6 hours of direct sunlight.', 'Prune in early spring.'),
+(1847, 'Spider Plant', 'Chlorophytum comosum', 'Asparagaceae', 'Spider Plants are easy to maintain and grow.', 'Easy', '', 'Average', '', 'part shade, full shade', 'Low', false, 'Water once a week.', 'Prefers indirect sunlight for 4-6 hours.', 'Prune in late winter or early spring.'),
+(2272, 'Sago Palm', 'Cycas revoluta', 'Cycadaceae', 'The Sago Palm is an amazing plant species.', 'Medium', '', 'Average', 'Well-drained', 'full sun, part shade', 'Low', true, 'Water once per week in spring and summer.', 'Requires at least 6 hours of direct sunlight.', 'Prune in early spring.'),
+(2773, 'Golden Pothos', 'Epipremnum aureum', 'Araceae', 'Golden Pothos is an easy-care houseplant.', '', '', 'Average', 'Well-drained', 'part sun/part shade', 'High', true, 'Water when top inch of soil is dry.', 'Prefers indirect and bright light.', 'Prune in spring.'),
+(2963, 'Fiddle-Leaf Fig', 'Ficus lyrata', 'Moraceae', 'The Fiddle-Leaf Fig is a stunning indoor plant.', 'Medium', '', 'Average', '', 'part sun/part shade', 'High', false, 'Water generously once a week.', 'Prefers bright, indirect sunlight.', 'Prune in early spring.'),
+(1469, 'Rattlesnake Plant', 'Calathea lancifolia', 'Marantaceae', 'Rattlesnake Plant has extraordinary foliage.', 'Medium', '', 'Average', '', 'part shade, part sun/part shade', 'Low', false, 'Water every 1-2 weeks.', 'Bright, indirect sunlight up to 4 hours.', 'Prune sparingly.'),
+(2193, 'Jade Plant', 'Crassula ovata', 'Crassulaceae', 'The Jade Plant is a low-maintenance succulent.', 'Moderate', '', 'Minimum', 'Well-drained', 'full sun', 'Low', false, 'Water when soil is entirely dry.', 'Needs at least 4 hours of bright light.', 'Prune in spring or summer.'),
+(2531, 'Fragrant Dracaena', 'Dracaena fragrans', 'Asparagaceae', 'Fragrant Dracaena brings beauty and fragrance.', '', '', 'Average', 'Well-drained', 'part shade, part sun/part shade', 'Low', false, 'Water once a week during growing season.', 'Needs 4 to 6 hours of indirect light.', 'Prune in late summer or early fall.'),
+(1036, 'Cast-Iron Plant', 'Aspidistra elatior', 'Asparagaceae', 'The Cast-Iron Plant is resilient and enduring.', 'Low', '', 'Average', '', 'part shade, full shade', 'Low', false, 'Water once a week in growing season.', 'Requires 2-4 hours of indirect sunlight.', 'Prune in late winter or early spring.'),
+(2885, 'Christplant', 'Euphorbia milii', 'Euphorbiaceae', 'The Christplant adds beauty to any garden.', 'Medium', '', 'Average', '', 'full sun, part sun/part shade', 'Low', false, 'Water every 1-2 weeks.', 'Needs 4 to 6 hours of direct sun.', 'Prune in early spring.');
+
+
+INSERT INTO user_plant (user_id, plant_id, nickname, acquisition_date, last_watering, next_watering, image_url)
+VALUES
+(1, 3, 'Rosy', '2025-12-01', '2026-02-21', '2026-03-13', NULL),
+(1, 5, 'Ant', '2025-11-15', '2026-02-21', '2026-03-03', NULL),
+(1, 7, 'Spidey', '2025-10-01', '2026-02-21', '2026-03-03', NULL);
