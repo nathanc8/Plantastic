@@ -1,0 +1,70 @@
+name: Playwright E2E Tests
+on:
+  push:
+    branches: [develop, main]
+  pull_request:
+    branches: [develop, main]
+
+jobs:
+  e2e:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "21"
+
+      - name: Start backend
+        run: |
+          cd backend
+          chmod +x mvnw
+          ./mvnw spring-boot:run -Dspring-boot.run.profiles=e2e &
+          sleep 60
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Wait for backend
+        run: |
+          for i in $(seq 1 30); do
+            curl -s http://127.0.0.1:8080/api/auth/login && break
+            echo "Waiting for backend... ($i)"
+            sleep 5
+          done
+
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          npm ci
+
+      - name: Install Playwright Browsers
+        run: |
+          cd frontend
+          npx playwright install --with-deps
+
+      - name: Start frontend
+        run: |
+          cd frontend
+          npm run dev &
+          sleep 10
+
+      - name: Run Playwright tests
+        run: |
+          cd frontend
+          npx playwright test
+        env:
+          CI: true
+          API_URL: http://127.0.0.1:8080
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: frontend/playwright-report/
+          retention-days: 30

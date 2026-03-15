@@ -24,14 +24,13 @@ export default function InputField({
   max,
 }: InputFieldProps) {
   const [showPassword, setShowPassword] = useState(false);
+  const inputId = `input-${register.name}`;
 
   const inputType = showPasswordToggle
     ? showPassword
       ? "text"
       : "password"
     : type;
-
-  const inputId = register.name;
 
   return (
     <div className="mb-4">

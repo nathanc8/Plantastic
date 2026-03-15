@@ -3,6 +3,7 @@ package com.plantastic.backend.service;
 import com.plantastic.backend.dto.auth.RegisterRequest;
 import com.plantastic.backend.event.UserLoginSuccessEvent;
 import com.plantastic.backend.models.entity.User;
+import com.plantastic.backend.models.types.NotificationsPreferences;
 import com.plantastic.backend.models.types.UserRole;
 import com.plantastic.backend.repository.UserRepository;
 import com.plantastic.backend.util.UserUtil;

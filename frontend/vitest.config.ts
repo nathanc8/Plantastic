@@ -7,11 +7,11 @@ export default defineConfig({
     css: true,
     setupFiles: "./src/tests/setup/setupTests.ts",
     testTimeout: 10000,
-    //exclude: , // Example: Exclude e2e tests
     coverage: {
       provider: "v8", // Use Vite's default coverage provider
       reporter: ["text", "json", "html"],
     },
+    exclude: ["**/node_modules/**", "**/dist/**", "**/e2e/**"],
     alias: {
       "@/assets": "/src/assets",
     },

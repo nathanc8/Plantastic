@@ -37,6 +37,8 @@ export const ProfileMenu = ({
       <div ref={menuRef} className="relative z-20">
         <button
           onClick={() => setIsOpen(!isOpen)}
+          aria-expanded={isOpen}
+          aria-label="Profile menu"
           className="flex flex-col items-center justify-center gap-1"
         >
           <PiUserCircleGearFill className={iconClassName} />
@@ -47,23 +49,27 @@ export const ProfileMenu = ({
           <div
             className="absolute bottom-full mb-2 right-0 w-40 rounded-md shadow-lg bg-linen font-bellota ring-1 ring-black ring-opacity-5 z-30"
             role="menu"
+            aria-label="profile options"
           >
             <div className="py-1 flex flex-col items-center">
               <button
                 onClick={() => setIsOpen(false)}
                 className="block w-full text-center px-4 py-2 text-sm text-text-secondary hover:bg-gray-300"
+                role="menuitem"
               >
                 Profile
               </button>
               <button
                 onClick={() => setIsOpen(false)}
                 className="block w-full text-center px-4 py-2 text-sm text-text-secondary hover:bg-gray-300"
+                role="menuitem"
               >
                 Settings
               </button>
               <button
                 onClick={logout}
                 className="block  w-35 px-4 py-2 mt-4 bg-red-500 text-white rounded hover:bg-red-600"
+                role="menuitem"
               >
                 Logout
               </button>

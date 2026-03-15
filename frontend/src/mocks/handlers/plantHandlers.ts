@@ -7,3 +7,24 @@ export const plantSummariesHandlers = [
     return HttpResponse.json(mockPlants, { status: 200 });
   }),
 ];
+
+export const wateringMultiplePlantsHandlers = [
+  http.patch(
+    `${TEST_API_BASE_URL}/api/user-plants/water-multiples`,
+    async ({ request }) => {
+      const url = new URL(request.url);
+      const date = url.searchParams.get("date");
+
+      const plantIds = (await request.json()) as number[];
+
+      return HttpResponse.json(
+        {
+          message: "Your plants are no longer thirsty",
+          plantIds,
+          date,
+        },
+        { status: 200 },
+      );
+    },
+  ),
+];

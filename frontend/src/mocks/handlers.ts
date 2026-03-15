@@ -5,7 +5,10 @@ import {
   authStatusHandlers,
   gardenHandlers,
 } from "./handlers/authHandlers";
-import { plantSummariesHandlers } from "./handlers/plantHandlers";
+import {
+  plantSummariesHandlers,
+  wateringMultiplePlantsHandlers,
+} from "./handlers/plantHandlers";
 
 export const handlers = [
   ...loginHandlers,
@@ -14,4 +17,5 @@ export const handlers = [
   ...authStatusHandlers,
   ...gardenHandlers,
   ...plantSummariesHandlers,
+  ...wateringMultiplePlantsHandlers,
 ];
