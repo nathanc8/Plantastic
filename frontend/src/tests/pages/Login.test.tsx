@@ -1,7 +1,7 @@
 import { it, describe, expect } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
-import Login from "../../services/Login";
+import Login from "../../pages/Login";
 import { AuthProvider } from "../../context/AuthContext";
 import userEvent from "@testing-library/user-event";
 import { server } from "../../mocks/server";
@@ -15,7 +15,7 @@ const renderLogin = () => {
       <AuthProvider>
         <Login />
       </AuthProvider>
-    </MemoryRouter>
+    </MemoryRouter>,
   );
 };
 
@@ -28,7 +28,7 @@ const renderLoginWithHomePage = () => {
           <Route path="/" element={<div>Home Page</div>} />
         </Routes>
       </AuthProvider>
-    </MemoryRouter>
+    </MemoryRouter>,
   );
 };
 
@@ -38,16 +38,16 @@ const loginForm = async (
     email?: string;
     username?: string;
     password: string;
-  }
+  },
 ) => {
   const credential = data.email || data.username || "";
   await user.type(
     screen.getByPlaceholderText(/Enter username or email/i),
-    credential
+    credential,
   );
   await user.type(
     screen.getByPlaceholderText(/Enter password/i),
-    data.password
+    data.password,
   );
 };
 
@@ -57,7 +57,7 @@ describe("Login Page", () => {
     renderLogin();
     expect(screen.getByRole("heading", { name: /Login/i })).toBeInTheDocument();
     expect(
-      screen.getByPlaceholderText(/Enter username or email/i)
+      screen.getByPlaceholderText(/Enter username or email/i),
     ).toBeInTheDocument();
     expect(screen.getByPlaceholderText(/Enter password/i)).toBeInTheDocument();
   });
@@ -89,9 +89,9 @@ describe.each([
             user: mockUser,
             digitalGarden: [],
           },
-          { status: 200 }
+          { status: 200 },
         );
-      })
+      }),
     );
     // 2. COMPONENT RENDERING WITH initialEntries TO TRACK NAVIGATION
     renderLoginWithHomePage();
@@ -120,7 +120,7 @@ it("should show validation errors and not call API for empty fields", async () =
     http.post(`${TEST_API_BASE_URL}/api/auth/login`, () => {
       apiCalled = true;
       return HttpResponse.json({ success: true }, { status: 200 });
-    })
+    }),
   );
   renderLogin();
   const submitButton = screen.getByRole("button", { name: /Login/i });
@@ -140,9 +140,9 @@ it("should not login with wrong credentials", async () => {
     http.post(`${TEST_API_BASE_URL}/api/auth/login`, () => {
       return HttpResponse.json(
         { message: "Invalid credentials" },
-        { status: 401 }
+        { status: 401 },
       );
-    })
+    }),
   );
   renderLoginWithHomePage();
 

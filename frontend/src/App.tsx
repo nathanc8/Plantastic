@@ -1,10 +1,10 @@
 import { Routes, Route } from "react-router-dom";
-import Login from "./services/Login";
-import Home from "./services/Home";
-import SignUp from "./services/SignUp";
+import Login from "./pages/Login";
+import Home from "./pages/Home";
+import SignUp from "./pages/SignUp";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
-import Encyclopedia from "./services/Encyclopedia";
-import Advices from "./services/Advices";
+import Encyclopedia from "./pages/Encyclopedia";
+import Advices from "./pages/Advices";
 import { Toaster } from "react-hot-toast";
 
 export function App() {
