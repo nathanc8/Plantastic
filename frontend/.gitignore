@@ -27,4 +27,16 @@ coverage/
 *.njsproj
 *.sln
 *.sw?
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+e2e/.auth/
+test-results/
+playwright-report/
 coverage/
+blob-report/
+playwright/.cache/

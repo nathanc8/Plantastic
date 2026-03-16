@@ -13,15 +13,16 @@ export default function PlantCard({ plant }: { plant: UserPlant }) {
   const isThirsty = nextWateringDate < today;
   return (
     <article
+      data-testid="plant-card"
       id="plant-card"
       className="w-full max-w-sm h-36 flex bg-linen rounded-lg p-2 shadow-lg transform transition-all hover:-translate-y-1 duration-300 hover:shadow"
     >
       <img
+        id="plant-img"
         src={plant.userPlantImageUrl || plant.plantImageUrl}
-        alt={`Picture of ${plant.nickname}`}
-        className="w-28 h-28 rounded-lg object-cover"
+        alt={`${plant.commonName} photo`}
+        className="w-28 h-28 flex-shrink-0 rounded-lg bg-cover bg-center"
       />
-
       <div
         id="plant-card-desc"
         className="flex-1 flex flex-col font-bellota p-2 justify-between"

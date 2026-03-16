@@ -1,5 +1,6 @@
 import logo from "@/assets/img/plantastic1_logo.png";
 import { useNavigate } from "react-router";
+// import { Link } from "react-router-dom";
 
 export const Header = () => {
   const navigate = useNavigate();

@@ -61,7 +61,7 @@ export default function BottomNavigation({ onRefresh }: BottomNavigationProps) {
           onClick={() => navigate("/encyclopedia")}
           id="encyclopedia_button"
           className={getButtonClass("/encyclopedia")}
-          aria-lable="encyclopedia"
+          aria-label="encyclopedia"
         >
           <BiSolidBookBookmark className={getIconClass("/encyclopedia")} />
           <span className={textClass}>Encyclopedia</span>
@@ -73,10 +73,12 @@ export default function BottomNavigation({ onRefresh }: BottomNavigationProps) {
             {
               FormComponent: AddPlantForm,
               icon: RiAddLargeLine,
+              ariaLabel: "add a plant",
             },
             {
               FormComponent: WaterMultiplePlantsModal,
               icon: LuDroplets,
+              ariaLabel: "water your plants",
             },
           ]}
         />

@@ -10,6 +10,7 @@ type FloatingAddButtonProps = {
   menuOptions?: Array<{
     FormComponent: ComponentType<{ onClose: () => void }>;
     icon: IconType;
+    ariaLabel: string;
   }>;
 };
 
@@ -54,6 +55,7 @@ export default function FloatingAddButton({
               setIsModalOpen(true);
             }
           }}
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="
 					rounded-full w-full h-full 
 					bg-gradient-to-br from-forest from-50% to-[#232e23]
@@ -83,6 +85,7 @@ export default function FloatingAddButton({
               {menuOptions.map((option, index) => (
                 <motion.button
                   key={index}
+                  aria-label={option.ariaLabel}
                   initial={{ opacity: 0, scale: 0, y: 20 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{
