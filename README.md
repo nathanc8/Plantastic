@@ -1,112 +1,91 @@
-# Plantastic
- 
-Plantastic is a web application for managing houseplants, allowing users to track watering, manage their personal garden, and browse a botanical encyclopedia.
- 
-The application is available at:
-https://plantastic-nu.vercel.app/
- 
-## About
- 
-Plantastic lets users build a personalized digital garden, add their plants, track watering schedules, and discover new species through a botanical encyclopedia. The goal is to provide a simple, visual tool to help users take care of their plants on a daily basis.
- 
-This project was developed as part of a French RNCP professional certification, as a full-stack end-to-end project.
- 
-## Features
- 
-- User registration and session-based authentication
-- Personal garden with watering tracking
-- Per-plant thirst indicator
-- Custom photo upload for each plant
-- Browsable botanical encyclopedia
-- Responsive interface
- 
-## Tech Stack
- 
-**Frontend**
-- React 19 + TypeScript
-- Vite
-- Tailwind CSS
-- Zod (form validation)
- 
-**Backend**
+# Plantastic 🌿
+
+🌿 Plantastic – The app that pampers your plants! 🌱
+No more forgetting or overdoing it!
+Receive smart reminders, tailored advice, and fun facts.
+🍀 With [Plantastic](https://plantastic-nu.vercel.app/), grow your indoor garden 🍀
+
+## Tech stack
+
+- **Frontend** : React / TypeScript, Tailwind CSS — deployed on Vercel
+- **Backend** : Spring Boot / Java — deployed on Koyeb
+- **Database** : MySQL — hosted on a private server, we used DuckDns, Let's Encrypt and Docker
+- **CI/CD** : GitHub Actions
+
+## Prerequisites
+
+- Node.js 22+
 - Java 21
-- Spring Boot 3
-- MySQL 8
- 
-**External Services**
-- Cloudinary (photo upload and storage)
-- Perenual API (botanical data) : https://perenual.com/
- 
-**Deployment**
-- Frontend: Vercel
-- Backend: Koyeb
-- Database: MySQL on a private server (Docker, DuckDNS, Let's Encrypt)
- 
-## Development
- 
-### Requirements
- 
-- Node.js (recent version recommended)
-- npm
-- Java 21
+- MySQL 8+
 - Maven
- 
-### Frontend setup
- 
-```bash
-git clone https://github.com/<your-username>/plantastic.git
-cd plantastic/frontend
-npm install
+
+## Environment variables
+
+### Backend (`backend/src/main/resources/application.properties`)
+
 ```
- 
-### Run in development mode
- 
+SPRING_DATASOURCE_URL=
+SPRING_DATASOURCE_USERNAME=
+SPRING_DATASOURCE_PASSWORD=
+FRONTEND_STAGING_URL=
+FRONTEND_PROD_URL=
+```
+
+### Frontend (`.env`)
+
+```
+VITE_API_URL=
+```
+
+## Run the project locally
+
+### Backend
+
 ```bash
+cd backend
+./mvnw spring-boot:run
+```
+
+### Frontend
+
+```bash
+cd frontend
+npm install
 npm run dev
 ```
- 
-### Run tests
- 
+
+## Run tests
+
+### Unit tests (Vitest)
+
 ```bash
+cd frontend
 npm run test
 ```
- 
-### Production build
- 
+
+### E2E tests (Playwright)
+
 ```bash
-npm run build
+cd frontend
+npx playwright test
 ```
- 
-### Backend setup
- 
-```bash
-cd plantastic/backend
-```
- 
-Create an `application-local.properties` file with the required variables (see `application-exemple.properties` for the expected variable names).
- 
-```bash
-mvn spring-boot:run
-```
- 
-## Environment Variables
- 
-The backend uses environment variables for all sensitive configuration. No secrets are committed to the repository.
- 
-| Variable | Description |
-|---|---|
-| `DB_HOST` | Database host |
-| `DB_PORT` | Database port |
-| `DB_NAME` | Database name |
-| `DB_USERNAME` | MySQL user |
-| `DB_PASSWORD` | MySQL password |
-| `API_KEY` | Perenual API key |
-| `CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name |
-| `CLOUDINARY_API_KEY` | Cloudinary API key |
-| `CLOUDINARY_API_SECRET` | Cloudinary API secret |
-| `FRONTEND_PROD_URL` | Production frontend URL |
-| `FRONTEND_STAGING_URL` | Staging frontend URL |
- 
-## Author
- 
-Developed by Yennie Lake and Nathan Cazard as part of a professional certification project.
+
+## Deployment
+
+- **Frontend** : automatic deployment on Vercel on every push to `main`
+- **Backend** : automatic deployment on Koyeb on every push to `main`
+- **CI** : GitHub Actions runs Vitest and Playwright tests on every push to `develop` and `main`
+
+## Database server
+
+The database runs on a dedicated server secured with the following measures:
+
+- SSL enabled with a Let's Encrypt certificate (auto-renewed every 90 days via DuckDNS)
+- `root` user not exposed to applications
+- Dedicated application user with limited privileges (own database only)
+- SSL enforced for the application user (`REQUIRE SSL`)
+
+## Security best practices
+
+- Never commit passwords or secrets to Git
+- Use environment variables or a vault for all sensitive credentials

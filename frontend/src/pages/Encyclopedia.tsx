@@ -1,12 +1,12 @@
 // import React from 'react'
 import { useCallback, useEffect, useMemo, useState } from "react";
-import BackgroundWrapper from "../components/BackgroundWrapper";
-import BottomNavBar from "../components/BottomNavBar";
-import { Header } from "../components/Header";
-import { fetchAPI } from "../utils/api";
+import BackgroundWrapper from "../components/BackgroundWrapper.tsx";
+import BottomNavBar from "../components/BottomNavBar.tsx";
+import { Header } from "../components/Header.tsx";
+import { fetchAPI } from "../utils/api.ts";
 import type { PlantSummary } from "../types/PlantSummary.ts";
-import PlantCardEncyclopedia from "../components/EncyclopediaSummaryCard";
-import Modal from "../components/Modal";
+import PlantCardEncyclopedia from "../components/EncyclopediaSummaryCard.tsx";
+import Modal from "../components/Modal.tsx";
 import EncyclopediaDetailsCard from "../components/EncyclopediaDetailsCard.tsx";
 
 export default function Encyclopedia() {
