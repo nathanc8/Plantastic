@@ -3,7 +3,7 @@
 🌿 Plantastic – The app that pampers your plants! 🌱
 No more forgetting or overdoing it!
 Receive smart reminders, tailored advice, and fun facts.
-🍀 With Plantastic, grow your indoor garden 🍀
+🍀 With [Plantastic](https://plantastic-nu.vercel.app/), grow your indoor garden 🍀
 
 ## Tech stack
 
