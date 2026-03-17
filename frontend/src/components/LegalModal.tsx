@@ -25,7 +25,7 @@ export default function LegalModal({ isOpen, onClose }: LegalModalProps) {
           </p>
         </section>
 
-        {/* Suppression de compte */}
+        {/* Account deletion */}
         <section>
           <h3 className="text-lg font-semibold mb-2 text-sage">
             Account Deletion
@@ -46,7 +46,7 @@ export default function LegalModal({ isOpen, onClose }: LegalModalProps) {
           </p>
         </section>
 
-        {/* Éditeur */}
+        {/* Editor */}
         <section>
           <h3 className="text-lg font-semibold mb-2 text-sage">Editor</h3>
           <p className="text-text-secondary text-sm leading-relaxed">
