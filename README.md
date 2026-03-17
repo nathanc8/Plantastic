@@ -9,7 +9,7 @@ Receive smart reminders, tailored advice, and fun facts.
 
 - **Frontend** : React / TypeScript, Tailwind CSS — deployed on Vercel
 - **Backend** : Spring Boot / Java — deployed on Koyeb
-- **Database** : MySQL — hosted on Koyeb
+- **Database** : MySQL — hosted on a private server, we used DuckDns, Let's Encrypt and Docker
 - **CI/CD** : GitHub Actions
 
 ## Prerequisites
