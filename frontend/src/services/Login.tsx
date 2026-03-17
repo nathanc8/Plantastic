@@ -12,6 +12,7 @@ import Description from "../components/Description";
 import BackgroundWrapper from "../components/BackgroundWrapper";
 import { fetchAPI } from "../utils/api";
 import { useAuth } from "../context/AuthContext";
+import LegalFooter from "../components/LegalFooter";
 
 export default function Login() {
   // Set up states and routing for connection
@@ -140,6 +141,7 @@ export default function Login() {
           </AuthCard>
         </div>
       </div>
+      <LegalFooter />
     </BackgroundWrapper>
   );
 }
