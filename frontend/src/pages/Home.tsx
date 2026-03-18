@@ -4,6 +4,7 @@ import { Header } from "../components/Header";
 import PlantCard from "../components/PlantCard";
 // import { useAuth } from "../context/AuthContext";
 import { useGarden } from "../context/GardenContext";
+import LegalFooter from "../components/LegalFooter";
 
 export default function Home() {
   const { plants, isLoading } = useGarden();
@@ -31,6 +32,7 @@ export default function Home() {
           )}
         </div>
       </main>
+      <LegalFooter />
     </BackgroundWrapper>
   );
 }

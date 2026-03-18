@@ -2,6 +2,7 @@
 import BackgroundWrapper from "../components/BackgroundWrapper";
 import BottomNavBar from "../components/BottomNavBar";
 import { Header } from "../components/Header";
+import LegalFooter from "../components/LegalFooter";
 
 const Advices = () => {
   return (
@@ -14,6 +15,7 @@ const Advices = () => {
         🚧 Patience, we are working on it 🚧
       </p>
       <BottomNavBar />
+      <LegalFooter />
     </BackgroundWrapper>
   );
 };

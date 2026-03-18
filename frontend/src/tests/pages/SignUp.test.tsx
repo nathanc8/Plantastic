@@ -1,7 +1,7 @@
 import { it, describe, expect } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import SignUp from "../../services/SignUp";
+import SignUp from "../../pages/SignUp";
 import { AuthProvider } from "../../context/AuthContext";
 import userEvent from "@testing-library/user-event";
 import { server } from "../../mocks/server";
@@ -15,7 +15,7 @@ const renderSignUp = () => {
       <AuthProvider>
         <SignUp />
       </AuthProvider>
-    </MemoryRouter>
+    </MemoryRouter>,
   );
 };
 
@@ -26,20 +26,20 @@ const fillSignUpForm = async (
     username: string;
     password: string;
     confirmPassword: string;
-  }
+  },
 ) => {
   await user.type(screen.getByPlaceholderText(/Enter your email/i), data.email);
   await user.type(
     screen.getByPlaceholderText(/Enter your username/i),
-    data.username
+    data.username,
   );
   await user.type(
     screen.getByPlaceholderText(/Enter your password/i),
-    data.password
+    data.password,
   );
   await user.type(
     screen.getByPlaceholderText(/Please confirm your password/i),
-    data.confirmPassword
+    data.confirmPassword,
   );
 };
 
@@ -49,19 +49,19 @@ describe("Sign up Page", () => {
     renderSignUp();
 
     expect(
-      screen.getByRole("heading", { name: /Sign up/i })
+      screen.getByRole("heading", { name: /Sign up/i }),
     ).toBeInTheDocument();
     expect(
-      screen.getByPlaceholderText(/Enter your email/i)
+      screen.getByPlaceholderText(/Enter your email/i),
     ).toBeInTheDocument();
     expect(
-      screen.getByPlaceholderText(/Enter your username/i)
+      screen.getByPlaceholderText(/Enter your username/i),
     ).toBeInTheDocument();
     expect(
-      screen.getByPlaceholderText(/Enter your password/i)
+      screen.getByPlaceholderText(/Enter your password/i),
     ).toBeInTheDocument();
     expect(
-      screen.getByPlaceholderText(/Please confirm your password/i)
+      screen.getByPlaceholderText(/Please confirm your password/i),
     ).toBeInTheDocument();
   });
 });
@@ -80,7 +80,7 @@ it("should signup successfully", async () => {
       return HttpResponse.text(`User created: ${body.username}`, {
         status: 200,
       });
-    })
+    }),
   );
 
   renderSignUp();
@@ -111,7 +111,7 @@ it("should not signup successfully if password do not match", async () => {
     http.post(`${TEST_API_BASE_URL}/api/auth/register`, () => {
       apiCalled = true;
       return HttpResponse.json({ success: true }, { status: 200 });
-    })
+    }),
   );
 
   renderSignUp();
@@ -142,7 +142,7 @@ it("should show error for weak password", async () => {
     http.post(`${TEST_API_BASE_URL}/api/auth/register`, () => {
       apiCalled = true;
       return HttpResponse.json({ success: true }, { status: 200 });
-    })
+    }),
   );
 
   renderSignUp();
@@ -172,7 +172,7 @@ it("should show error for invalid email", async () => {
     http.post(`${TEST_API_BASE_URL}/api/auth/register`, () => {
       apiCalled = true;
       return HttpResponse.json({ success: true }, { status: 200 });
-    })
+    }),
   );
 
   renderSignUp();
@@ -200,7 +200,7 @@ it("should show error when email already exists", async () => {
   server.use(
     http.post(`${TEST_API_BASE_URL}/api/auth/register`, () => {
       return HttpResponse.json("Email already exists", { status: 400 });
-    })
+    }),
   );
 
   renderSignUp();
