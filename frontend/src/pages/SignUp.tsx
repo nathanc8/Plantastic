@@ -3,6 +3,7 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "react-router-dom";
 import { signUpSchema, type SignUpFormData } from "../schemas/signUpSchema";
+import LegalFooter from "../components/LegalFooter";
 //STYLES COMPONENTS
 import AuthCard from "../components/AuthCard";
 import SubmitButton from "../components/SubmitButton";
@@ -153,6 +154,7 @@ const SignUp: React.FC = () => {
           </AuthCard>
         </div>
       </div>
+      <LegalFooter />
     </BackgroundWrapper>
   );
 };

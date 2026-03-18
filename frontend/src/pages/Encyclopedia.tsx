@@ -8,6 +8,7 @@ import type { PlantSummary } from "../types/PlantSummary.ts";
 import PlantCardEncyclopedia from "../components/EncyclopediaSummaryCard.tsx";
 import Modal from "../components/Modal.tsx";
 import EncyclopediaDetailsCard from "../components/EncyclopediaDetailsCard.tsx";
+import LegalFooter from "../components/LegalFooter";
 
 export default function Encyclopedia() {
   const [plants, setPlants] = useState<PlantSummary[]>([]);
@@ -99,6 +100,7 @@ export default function Encyclopedia() {
         </Modal>
       )}
       <BottomNavBar onRefresh={fetchPlants} />
+      <LegalFooter />
     </BackgroundWrapper>
   );
 }
